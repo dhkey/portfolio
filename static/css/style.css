@@ -78,16 +78,88 @@
       --nav-height: 57px;
     }
 
+    body {
+      padding-top: 0;
+    }
+
+    .hero {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 100%;
+      z-index: 1;
+      padding: 28px 16px;
+    }
+
     .hero-content {
       flex-direction: column;
       text-align: center;
       gap: 20px;
     }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      letter-spacing: -0.4px;
+    }
+
+    .hero p.role {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
     .hero-text {
       text-align: center;
     }
+
     .badge-row {
       justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-tabs {
+      position: sticky;
+      top: 0;
+      left: auto;
+      width: 100%;
+      z-index: 30;
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 12px;
+      gap: 4px;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      padding: 14px 14px;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 32px 16px;
+    }
+
+    #projects.section {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .cta-block {
+      padding: 32px 20px;
     }
   }
   .badge {
