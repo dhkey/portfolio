@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denys Yazan - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <img src="{{ url_for('static', filename='img/my_photo.png') }}" class="avatar" alt="Denys Yazan">
+    <div class="hero-text">
+      <h1>Denys Yazan</h1>
+      <p class="role">Software Engineer · Systems Architect · Prague</p>
+      <div class="badge-row">
+        <span class="badge">Telegram Bots</span>
+        <span class="badge">Full-Stack</span>
+        <span class="badge">Backend</span>
+        <span class="badge">Frontend</span>
+        <span class="badge">API Integration</span>
+        <span class="badge">IOS apps</span>       
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <button class="tab active" onclick="show('projects',this)">Projects</button>
+  <button class="tab" onclick="show('skills',this)">Skills</button>
+  <button class="tab" onclick="show('about',this)">About</button>
+  <button class="tab" onclick="show('contact',this)">Contact</button>
+</div>
+
+<div id="projects" class="section visible">
+  <div class="projects-grid">
+
+    <div class="card">
+      <h3>stav-pro.cz</h3>
+      <p>Single-page promotional website for a construction company. Features a custom responsive UI design and an automated integration that sends contact form submissions directly to a Telegram chat.</p>
+      <div class="tag-row">
+        <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Telegram API</span><span class="tag">Landing Page</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://stav-pro.cz" target="_blank">stav-pro.cz ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>sms-ready.com</h3>
+      <p>SMS verification platform. Designed and built the complete product — design, frontend, backend, API provision, payment gateway and email system.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Django</span><span class="tag">REST API</span><span class="tag">Payments</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://sms-ready.com" target="_blank">sms-ready.com ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>smscheck.net</h3>
+      <p>SMS verification service — same architecture as sms-ready.com. Full design, frontend, backend and integration stack built independently.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Django</span><span class="tag">REST API</span><span class="tag">Payments</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://smscheck.net" target="_blank">smscheck.net ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>@sms_usa_bot</h3>
+      <p>Telegram bot backend for US SMS verification. Connects to the same core API infrastructure as sms-ready.com.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Asyncio</span><span class="tag">Telegram API</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://t.me/sms_usa_bot" target="_blank">Open bot ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>@codes_verify_bot</h3>
+      <p>Telegram bot for code verification. Backend developed with the same logic, connecting to API infrastructure for real-time code delivery.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Asyncio</span><span class="tag">Telegram API</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://t.me/codes_verify_bot" target="_blank">Open bot ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>@Rubedohealth_platformbot</h3>
+      <p>Telegram bot for selling paid access to private channels. Features automated subscription management and seamless payment integration via WayForPay.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Asyncio</span><span class="tag">Telegram API</span><span class="tag">WayForPay</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://t.me/Rubedohealth_platformbot" target="_blank">Open bot ↗</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>@SonsOfWar_UA_bot</h3>
+      <p>E-commerce Telegram bot for selling goods. Features a full product catalog, shopping cart experience, and automated order processing.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">Asyncio</span><span class="tag">Telegram API</span><span class="tag">E-commerce</span>
+      </div>
+      <div class="card-actions">
+        <a class="card-link" href="https://t.me/SonsOfWar_UA_bot" target="_blank">Open bot ↗</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="skills" class="section">
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Languages</h4>
+      <div class="skill-list">
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Python</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">C++</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Java</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Swift</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">PHP</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">JavaScript</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">TypeScript</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Bash / Shell</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">SQL</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">HTML / CSS</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Frameworks & Libs</h4>
+      <div class="skill-list">
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Django</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Flask</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">FastAPI</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Spring Boot</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Qt Framework</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">SwiftUI / UIKit</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Asyncio</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">FastAPI</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Aiogram</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Jinja2</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Infra & Tools</h4>
+      <div class="skill-list">
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Docker & CI/CD</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Git & Linux</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">SQL / NoSQL</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">REST / GraphQL</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Payment systems</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Nginx</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">PostgreSQL / MySQL</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Redis</span></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Practices</h4>
+      <div class="skill-list">
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Clean architecture</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">SOLID principles</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Design Patterns</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Agile / Scrum</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Code Review</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">Debugging & Profiling</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">API Design</span></div>
+        <div class="skill-item"><div class="skill-dot"></div><span class="skill-name">System Design</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="about" class="section">
+  <div class="about-block">
+    <h3>About</h3>
+    <p class="about-text">Software Developer and Systems Architect with hands-on experience designing, building, and shipping complex high-performance applications — independently, end-to-end. Specializing in Python / Django backend with a strong emphasis on clean architecture, scalable systems, and long-term reliability. Currently studying Software Engineering at CTU Prague and looking for an internship to grow within a team environment.</p>
+  </div>
+  <div class="about-block">
+    <h3>Education</h3>
+    <div class="edu-card">
+      <div class="edu-dot"></div>
+      <div>
+        <div class="edu-title">Czech Technical University in Prague</div>
+        <div class="edu-sub">Software Engineering · 2025 – 2028</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-dot"></div>
+      <div>
+        <div class="edu-title">Central Ukrainian Technical University</div>
+        <div class="edu-sub">Cybersecurity · 2024 – 2028</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-block">
+    <h3>Languages</h3>
+    <div class="lang-row">
+      <span class="lang-badge">Ukrainian — Native</span>
+      <span class="lang-badge">Russian — Native</span>
+      <span class="lang-badge">Czech — C1</span>
+      <span class="lang-badge">English — B2</span>
+    </div>
+  </div>
+</div>
+
+<div id="contact" class="section">
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-label">Email</div>
+      <div class="contact-val">denys-work@seznam.cz</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-label">Phone</div>
+      <div class="contact-val">+420 722 133 964</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-label">Location</div>
+      <div class="contact-val">Prague, Czech Republic</div>
+    </div>
+    <!-- <div class="contact-card">
+      <div class="contact-label">Availability</div>
+      <div class="contact-val">Open to internship</div>
+    </div> -->
+  </div>
+  <div class="cta-block">
+    <h3>Looking for an internship</h3>
+    <p>Eager to work within a team, learn from experienced engineers, and deepen understanding of industry best practices.</p>
+    <a class="cta-btn" href="mailto:denys-work@seznam.cz">Send email</a>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
