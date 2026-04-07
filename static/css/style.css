@@ -181,7 +181,13 @@
   }
   .card-link:hover { color: var(--color-accent-strong); transform: translateY(-1px); }
 
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .skills-grid { display: grid; grid-template-columns: repeat(4, minmax(220px, 1fr)); gap: 16px; align-items: start; }
+  @media (max-width: 1200px) {
+    .skills-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+  }
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
   .skill-group h4 {
     font-size: 13px; font-weight: 600;
     color: var(--color-text-secondary);
