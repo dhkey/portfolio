@@ -200,6 +200,45 @@ a.chip[data-variant="ghost"]:focus-visible {
   border-color: var(--line-hi);
 }
 
+/* projects filter — shell flags */
+.prompt .opt { color: var(--accent); }
+
+.flag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--line-hi);
+  border-radius: var(--radius);
+  color: var(--fg-dim);
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: inherit;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.flag:hover {
+  background: var(--bg-raised-hi);
+  color: var(--fg);
+}
+.flag[aria-pressed="true"] {
+  background: rgba(126, 231, 135, 0.08);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+.flag-count {
+  color: var(--fg-faint);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+.flag[aria-pressed="true"] .flag-count { color: var(--accent-dim); }
+
+.total {
+  color: var(--fg-faint);
+  font-size: 0.8125rem;
+}
+
 .link {
   color: var(--fg);
   border-bottom: 1px solid var(--line-hi);

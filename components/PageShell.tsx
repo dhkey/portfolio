@@ -9,7 +9,7 @@ export function PageShell({
   children,
 }: {
   path: string;
-  cmd: string;
+  cmd: React.ReactNode;
   title: string;
   intro?: string;
   children: React.ReactNode;
