@@ -1,6 +1,6 @@
 # portfolio
 
-Terminal-styled personal site for Denys Yazan — [denysyazan.com](https://denysyazan.com).
+Terminal-styled personal site for Denys Yazan — [denys-yazan.lol](https://denys-yazan.lol).
 Next.js 16 (App Router, React 19, TypeScript), plain CSS, fully static, deployed on Vercel.
 
 ```bash
