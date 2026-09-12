@@ -17,12 +17,13 @@ export const metadata: Metadata = {
     template: `%s - ${person.displayName}`,
   },
   description:
-    "Denys Yazan - Software Engineer & Systems Architect in Prague. Python/Django backend specialist building full-stack apps, Telegram bots and APIs. Software Engineer Intern at make.com.",
+    "Denys Yazan - Software Engineer & Systems Architect in Prague. Full-stack engineer building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
   authors: [{ name: person.displayName, url: siteUrl }],
   creator: person.displayName,
   keywords: [
-    "Denys Yazan", "software engineer", "Prague", "Python", "Django",
-    "backend developer", "Telegram bots", "full-stack", "systems architect",
+    "Denys Yazan", "software engineer", "Prague", "full-stack",
+    "Next.js", "React", "TypeScript", "Python", "Django", "FastAPI",
+    "Telegram bots", "systems architect",
   ],
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
@@ -32,13 +33,13 @@ export const metadata: Metadata = {
     siteName: person.displayName,
     title: `${person.displayName} - Software Engineer & Systems Architect`,
     description:
-      "Python/Django backend specialist in Prague building full-stack apps, Telegram bots and APIs. Software Engineer Intern at make.com.",
+      "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
   },
   twitter: {
     card: "summary",
     title: `${person.displayName} - Software Engineer & Systems Architect`,
     description:
-      "Python/Django backend specialist in Prague building full-stack apps, Telegram bots and APIs.",
+      "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, and Telegram bots.",
   },
 };
 
