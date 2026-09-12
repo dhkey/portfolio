@@ -5,7 +5,7 @@ import { projects } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Selected work by Denys Yazan - Django e-commerce platforms, SMS verification services, Telegram bots and desktop utilities.",
+    "Selected work by Denys Yazan - Next.js and Django platforms, SMS verification services, e-commerce sites, Telegram bots and desktop utilities.",
 };
 
 export default function Projects() {

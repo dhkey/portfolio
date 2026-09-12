@@ -6,7 +6,7 @@ export const person = {
   host: "yazan",
   user: "denys",
   tagline:
-    "I design and ship full-stack products end to end - Python/Django backends, REST APIs, Telegram bots and the infrastructure under them.",
+    "I design and ship full-stack products end to end - Next.js frontends, Python backends on Django and FastAPI, REST APIs and the infrastructure under them.",
   status: "Software Engineer Intern at make.com · studying Software Engineering at CTU Prague.",
   email: "denys-work@seznam.cz",
   phone: "+420 722 133 964",
@@ -27,12 +27,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "sms-ready.com",
+    name: "smstogo.net",
     summary:
-      "SMS verification platform. Designed and built the complete product - design, frontend, backend, API provision, payment gateway and email system.",
-    tags: ["python", "django", "rest-api", "payments"],
-    href: "https://sms-ready.com",
-    linkLabel: "sms-ready.com",
+      "SMS verification platform built from zero - Next.js frontend, FastAPI backend on PostgreSQL, custom auth system, public API, payment gateway integration and CDN setup.",
+    tags: ["next.js", "fastapi", "postgresql", "payments"],
+    href: "https://smstogo.net",
+    linkLabel: "smstogo.net",
   },
   {
     name: "fabrics.od.ua",
@@ -43,12 +43,12 @@ export const projects: Project[] = [
     linkLabel: "fabrics.od.ua",
   },
   {
-    name: "smscheck.net",
+    name: "denys-yazan.lol",
     summary:
-      "SMS verification service sharing the sms-ready.com architecture. Full design, frontend, backend and integration stack built independently.",
-    tags: ["python", "django", "rest-api", "payments"],
-    href: "https://smscheck.net",
-    linkLabel: "smscheck.net",
+      "This site. Terminal-styled personal portfolio with an interactive prompt - ls, cd, tab completion and history. Next.js App Router on React 19 and TypeScript, fully prerendered, no dependencies beyond the framework.",
+    tags: ["next.js", "react", "typescript", "static-site"],
+    href: "https://denys-yazan.lol",
+    linkLabel: "denys-yazan.lol",
   },
   {
     name: "stav-pro.cz",
@@ -57,6 +57,22 @@ export const projects: Project[] = [
     tags: ["html/css", "javascript", "telegram-api", "landing"],
     href: "https://stav-pro.cz",
     linkLabel: "stav-pro.cz",
+  },
+  {
+    name: "sms-ready.com",
+    summary:
+      "SMS verification platform. Designed and built the complete product - design, frontend, backend, API provision, payment gateway and email system.",
+    tags: ["python", "django", "rest-api", "payments"],
+    href: "https://sms-ready.com",
+    linkLabel: "sms-ready.com",
+  },
+  {
+    name: "smscheck.net",
+    summary:
+      "SMS verification service sharing the sms-ready.com architecture. Full design, frontend, backend and integration stack built independently.",
+    tags: ["python", "django", "rest-api", "payments"],
+    href: "https://smscheck.net",
+    linkLabel: "smscheck.net",
   },
   {
     name: "@fabricscomuaBot",
@@ -119,8 +135,9 @@ export const skillGroups: { label: string; items: string[] }[] = [
   {
     label: "frameworks",
     items: [
-      "Django", "Flask", "FastAPI", "Spring Boot", "Qt",
-      "SwiftUI / UIKit", "Asyncio", "Aiogram", "Jinja2",
+      "Next.js", "React", "Django", "FastAPI", "Flask",
+      "Spring Boot", "Qt", "SwiftUI / UIKit", "Asyncio",
+      "Aiogram", "Jinja2",
     ],
   },
   {
@@ -142,7 +159,7 @@ export const skillGroups: { label: string; items: string[] }[] = [
 export const about = {
   bio: [
     "Software developer and systems architect with hands-on experience designing, building and shipping complex high-performance applications - independently, end to end.",
-    "I specialise in Python / Django backends with a strong emphasis on clean architecture, scalable systems and long-term reliability. Currently studying Software Engineering at CTU Prague while working as a Software Engineer Intern at make.com, growing inside a team environment.",
+    "I work across the stack - Next.js and TypeScript on the front, Python on Django and FastAPI behind it - with a strong emphasis on clean architecture, scalable systems and long-term reliability. Currently studying Software Engineering at CTU Prague while working as a Software Engineer Intern at make.com, growing inside a team environment.",
   ],
 };
 

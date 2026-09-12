@@ -5,7 +5,7 @@ import { skillGroups } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Skills",
   description:
-    "Languages, frameworks, infrastructure and engineering practices Denys Yazan works with - Python, Django, FastAPI, Docker, PostgreSQL and more.",
+    "Languages, frameworks, infrastructure and engineering practices Denys Yazan works with - Next.js, React, TypeScript, Python, Django, FastAPI, Docker, PostgreSQL and more.",
 };
 
 export default function Skills() {
