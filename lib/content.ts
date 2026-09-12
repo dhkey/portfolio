@@ -17,8 +17,13 @@ export const person = {
   avatar: "/denys.jpg",
 };
 
+/** Filterable buckets on /projects — the values behind `ls -l --type=…`. */
+export const projectTypes = ["web", "macos", "bot"] as const;
+export type ProjectType = (typeof projectTypes)[number];
+
 export type Project = {
   name: string;
+  type: ProjectType;
   summary: string;
   tags: string[];
   href: string;
@@ -28,6 +33,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: "smstogo.net",
+    type: "web",
     summary:
       "SMS verification platform built from zero - Next.js frontend, FastAPI backend on PostgreSQL, custom auth system, public API, payment gateway integration and CDN setup.",
     tags: ["next.js", "fastapi", "postgresql", "payments"],
@@ -36,6 +42,7 @@ export const projects: Project[] = [
   },
   {
     name: "fabrics.od.ua",
+    type: "web",
     summary:
       "Full-stack e-commerce site for a fabric store. Built with Django, featuring automated product parsing and migration from the legacy website.",
     tags: ["python", "django", "web-scraping", "full-stack"],
@@ -44,6 +51,7 @@ export const projects: Project[] = [
   },
   {
     name: "denys-yazan.lol",
+    type: "web",
     summary:
       "This site. Terminal-styled personal portfolio with an interactive prompt - ls, cd, tab completion and history. Next.js App Router on React 19 and TypeScript, fully prerendered, no dependencies beyond the framework.",
     tags: ["next.js", "react", "typescript", "static-site"],
@@ -52,6 +60,7 @@ export const projects: Project[] = [
   },
   {
     name: "stav-pro.cz",
+    type: "web",
     summary:
       "Single-page promotional site for a construction company. Custom responsive UI plus an integration that pipes contact form submissions straight into a Telegram chat.",
     tags: ["html/css", "javascript", "telegram-api", "landing"],
@@ -60,6 +69,7 @@ export const projects: Project[] = [
   },
   {
     name: "Beacon",
+    type: "macos",
     summary:
       "Native macOS application launcher. Menu-bar SwiftUI/AppKit app with a global hotkey, diacritic-insensitive fuzzy search across installed apps, keyboard navigation and web-search fallback - shipped as universal DMG/PKG builds from a tagged GitHub Actions release pipeline.",
     tags: ["swift", "swiftui", "macos", "desktop"],
@@ -68,6 +78,7 @@ export const projects: Project[] = [
   },
   {
     name: "SideMouseButtons",
+    type: "macos",
     summary:
       "macOS utility for remapping the side mouse buttons - switch between desktops or bind custom actions and hotkeys without reaching for the keyboard.",
     tags: ["swift", "macos", "desktop", "automation"],
@@ -76,6 +87,7 @@ export const projects: Project[] = [
   },
   {
     name: "sms-ready.com",
+    type: "web",
     summary:
       "SMS verification platform. Designed and built the complete product - design, frontend, backend, API provision, payment gateway and email system.",
     tags: ["python", "django", "rest-api", "payments"],
@@ -84,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     name: "smscheck.net",
+    type: "web",
     summary:
       "SMS verification service sharing the sms-ready.com architecture. Full design, frontend, backend and integration stack built independently.",
     tags: ["python", "django", "rest-api", "payments"],
@@ -92,6 +105,7 @@ export const projects: Project[] = [
   },
   {
     name: "@fabricscomuaBot",
+    type: "bot",
     summary:
       "AI support bot for fabrics.od.ua. Answers customer questions about the full product catalogue pulled live from the website database.",
     tags: ["python", "telegram-api", "chatgpt", "openai"],
@@ -100,6 +114,7 @@ export const projects: Project[] = [
   },
   {
     name: "@Rubedohealth_platformbot",
+    type: "bot",
     summary:
       "Telegram bot selling paid access to private channels. Automated subscription management with WayForPay payment integration.",
     tags: ["python", "asyncio", "telegram-api", "wayforpay"],
@@ -108,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     name: "@SonsOfWar_UA_bot",
+    type: "bot",
     summary:
       "E-commerce Telegram bot with a full product catalogue, shopping cart flow and automated order processing.",
     tags: ["python", "asyncio", "telegram-api", "e-commerce"],
@@ -116,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     name: "@sms_usa_bot",
+    type: "bot",
     summary:
       "Telegram bot backend for US SMS verification, wired into the same core API infrastructure as sms-ready.com.",
     tags: ["python", "asyncio", "telegram-api"],
@@ -124,6 +141,7 @@ export const projects: Project[] = [
   },
   {
     name: "@codes_verify_bot",
+    type: "bot",
     summary:
       "Telegram bot for code verification. Backend built on shared API infrastructure for real-time code delivery.",
     tags: ["python", "asyncio", "telegram-api"],

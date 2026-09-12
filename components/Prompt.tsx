@@ -6,7 +6,7 @@ export function Prompt({
   cursor = false,
 }: {
   path?: string;
-  cmd?: string;
+  cmd?: React.ReactNode;
   cursor?: boolean;
 }) {
   return (
