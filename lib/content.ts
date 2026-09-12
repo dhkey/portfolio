@@ -59,6 +59,22 @@ export const projects: Project[] = [
     linkLabel: "stav-pro.cz",
   },
   {
+    name: "Beacon",
+    summary:
+      "Native macOS application launcher. Menu-bar SwiftUI/AppKit app with a global hotkey, diacritic-insensitive fuzzy search across installed apps, keyboard navigation and web-search fallback - shipped as universal DMG/PKG builds from a tagged GitHub Actions release pipeline.",
+    tags: ["swift", "swiftui", "macos", "desktop"],
+    href: "https://github.com/dhkey/Beacon",
+    linkLabel: "github.com/dhkey/Beacon",
+  },
+  {
+    name: "SideMouseButtons",
+    summary:
+      "macOS utility for remapping the side mouse buttons - switch between desktops or bind custom actions and hotkeys without reaching for the keyboard.",
+    tags: ["swift", "macos", "desktop", "automation"],
+    href: "https://github.com/dhkey/SideMouseButtons",
+    linkLabel: "github.com/dhkey/SideMouseButtons",
+  },
+  {
     name: "sms-ready.com",
     summary:
       "SMS verification platform. Designed and built the complete product - design, frontend, backend, API provision, payment gateway and email system.",
@@ -113,14 +129,6 @@ export const projects: Project[] = [
     tags: ["python", "asyncio", "telegram-api"],
     href: "https://t.me/codes_verify_bot",
     linkLabel: "t.me/codes_verify_bot",
-  },
-  {
-    name: "SideMouseButtons",
-    summary:
-      "Desktop utility for remapping side mouse buttons to custom actions and hotkeys for faster workflow automation.",
-    tags: ["c++", "desktop", "automation"],
-    href: "https://github.com/dhkey/SideMouseButtons",
-    linkLabel: "github.com/dhkey/SideMouseButtons",
   },
 ];
 
