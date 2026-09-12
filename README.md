@@ -1,70 +1,47 @@
 # portfolio
 
-Terminal-styled personal site for Denys Yazan - a Next.js app deployed on Vercel.
-
-## Stack
-
-| | |
-|---|---|
-| Framework | Next.js 16 (App Router, React 19, TypeScript) |
-| Rendering | Every route prerendered at build time (no server data fetching) |
-| Styling | Plain CSS with custom properties in `app/globals.css` |
-| Hosting | Vercel |
-
-## Develop
+Terminal-styled personal site for Denys Yazan — [denysyazan.com](https://denysyazan.com).
+Next.js 16 (App Router, React 19, TypeScript), plain CSS, fully static, deployed on Vercel.
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev      # http://localhost:3000
+npm run build    # production build + typecheck
 ```
-
-## Build
-
-```bash
-npm run build        # production build + typecheck
-npm start            # serve the build at http://localhost:3000
-```
-
-## Deploy
-
-Vercel auto-detects Next.js - no `vercel.json` needed. Push to `main` and it
-builds; pull requests get preview deployments.
-
-First-time setup:
-
-1. Import the repo at [vercel.com/new](https://vercel.com/new). Leave framework,
-   build command and output directory on their detected defaults.
-2. Add `denysyazan.com` under **Settings -> Domains** and point the registrar's
-   records at Vercel.
-3. Nothing to configure beyond that - there are no environment variables.
-
-`siteUrl` in [`lib/content.ts`](lib/content.ts) feeds canonical URLs, Open Graph
-tags, `sitemap.xml` and `robots.txt`, so it has to match the production domain.
-
-Security headers (`X-Content-Type-Options`, `X-Frame-Options`,
-`Referrer-Policy`, `Permissions-Policy`, HSTS) are set in
-[`next.config.ts`](next.config.ts).
 
 ## Editing content
 
-All copy lives in [`lib/content.ts`](lib/content.ts) - projects, skills,
-experience, education, languages and contact details. Pages read from it, so
-adding a project means appending one object to the `projects` array.
+All copy lives in [`lib/content.ts`](lib/content.ts) — pages render from it, nothing is
+hardcoded in JSX. Adding a project = appending one object to the `projects` array.
+
+`siteUrl` in that file feeds canonical URLs, Open Graph tags, `sitemap.xml` and
+`robots.txt`, so it must match the production domain.
 
 ## Layout
 
 ```
 app/
   layout.tsx        root shell, fonts, metadata, JSON-LD
-  page.tsx          the map / index with the interactive prompt
+  page.tsx          index / interactive prompt
   projects|skills|about|contact/page.tsx
   not-found.tsx     404
   globals.css       design tokens + every component style
   sitemap.ts robots.ts
 components/
+  Terminal.tsx      the only client component — ls, help, cd <page>, tab, history
   Prompt.tsx        the `user@host:~$ cmd` chrome line
   PageShell.tsx     shared frame for inner pages
-  Terminal.tsx      client-side command input (ls, help, cd <page>, tab, history)
 lib/content.ts      all site copy
-public/denys.jpg    portrait
 ```
+
+## Things worth knowing
+
+- **No environment variables, no `vercel.json`.** Push to `main` and Vercel builds it;
+  PRs get preview deployments.
+- **Everything prerenders at build time.** No server data fetching — if a page starts
+  needing runtime data, that assumption (and the `force-static` in `sitemap.ts` /
+  `robots.ts`) breaks.
+- **Security headers** live in [`next.config.ts`](next.config.ts). There is deliberately
+  no CSP: the JSON-LD block in `layout.tsx` is an inline script, and nonce-ing it would
+  force every page out of static rendering.
+- **`trailingSlash: true`** — links and canonical URLs end in `/`.
