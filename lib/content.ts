@@ -189,4 +189,4 @@ export const externals: { path: string; href: string }[] = [
   { path: "/email", href: `mailto:${person.email}` },
 ];
 
-export const siteUrl = "https://denysyazan.com";
+export const siteUrl = "https://denys-yazan.lol";
