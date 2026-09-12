@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageShell } from "@/components/PageShell";
-import { person, about, experience, education, languages } from "@/lib/content";
+import { Section } from "@/components/Section";
+import {
+  person,
+  about,
+  experience,
+  education,
+  languages,
+  type TimelineEntry,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -9,19 +17,33 @@ export const metadata: Metadata = {
     "Denys Yazan - software engineer and systems architect in Prague. Software Engineer Intern at make.com, studying Software Engineering at CTU Prague.",
 };
 
+/** Dated entries hung off a vertical spine; the first one gets the lit node. */
+function Timeline({ entries }: { entries: TimelineEntry[] }) {
+  return (
+    <ul className="tl-list">
+      {entries.map((e) => (
+        <li key={e.title} className="tl">
+          <span className="tl-period">{e.period}</span>
+          <span>
+            <span className="tl-title">{e.title}</span>
+            <br />
+            <span className="tl-detail">{e.detail}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function About() {
   return (
-    <PageShell
-      path="~/about"
-      cmd="cat about.md"
-      title="about"
-    >
+    <PageShell path="~/about" cmd="cat about.md" title="about">
       <div className="stack-m">
         <section className="bio">
           <Image
             className="avatar"
             src={person.avatar}
-            alt={`Portrait of ${person.displayName}`}
+            alt={`Portrait of ${person.name}`}
             width={88}
             height={88}
             priority
@@ -35,40 +57,15 @@ export default function About() {
           </div>
         </section>
 
-        <section className="stack-s">
-          <h2 className="section-head">experience</h2>
-          <ul className="tl-list">
-            {experience.map((e) => (
-              <li key={e.title} className="tl">
-                <span className="tl-period">{e.period}</span>
-                <span>
-                  <span className="tl-title">{e.title}</span>
-                  <br />
-                  <span className="tl-detail">{e.detail}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Section label="experience">
+          <Timeline entries={experience} />
+        </Section>
 
-        <section className="stack-s">
-          <h2 className="section-head">education</h2>
-          <ul className="tl-list">
-            {education.map((e) => (
-              <li key={e.title} className="tl">
-                <span className="tl-period">{e.period}</span>
-                <span>
-                  <span className="tl-title">{e.title}</span>
-                  <br />
-                  <span className="tl-detail">{e.detail}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Section label="education">
+          <Timeline entries={education} />
+        </Section>
 
-        <section className="stack-s">
-          <h2 className="section-head">languages</h2>
+        <Section label="languages">
           <ul className="kv-list">
             {languages.map((l) => (
               <li key={l.name} className="kv">
@@ -78,7 +75,7 @@ export default function About() {
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       </div>
     </PageShell>
   );

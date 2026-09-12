@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { PageShell } from "@/components/PageShell";
 import { Prompt } from "@/components/Prompt";
-import { routes } from "@/lib/content";
+import { RouteChips } from "@/components/RouteChips";
 
 export const metadata: Metadata = {
   title: "404 - no such file or directory",
@@ -9,34 +9,17 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="page stack-l">
-      <header className="stack-s">
-        <Prompt path="~" cmd="cd ./nowhere" />
-        <h1 className="title">404</h1>
-        <p className="muted">no such file or directory</p>
-      </header>
-
+    <PageShell
+      path="~"
+      cmd="cd ./nowhere"
+      title="404"
+      intro="no such file or directory"
+      back="cd ~"
+    >
       <section className="stack-s">
         <Prompt path="~" cmd="ls" />
-        <ul className="chip-row">
-          {routes.map((r) => (
-            <li key={r.path}>
-              <Link className="chip" href={r.path}>
-                {r.path}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <RouteChips />
       </section>
-
-      <footer className="stack-s">
-        <hr className="rule" />
-        <div className="chip-row">
-          <Link className="chip" href="/">
-            cd ~
-          </Link>
-        </div>
-      </footer>
-    </main>
+    </PageShell>
   );
 }

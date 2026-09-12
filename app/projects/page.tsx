@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { UrlLink } from "@/components/ExternalLink";
 import { PageShell } from "@/components/PageShell";
 import { projects } from "@/lib/content";
 
@@ -28,14 +29,7 @@ export default function Projects() {
             <p className="entry-summary">{p.summary}</p>
             <div className="entry-meta">
               <span className="tags">{p.tags.join(" · ")}</span>
-              <a
-                className="link"
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {p.linkLabel} <span className="arrow">↗</span>
-              </a>
+              <UrlLink href={p.href} />
             </div>
           </li>
         ))}

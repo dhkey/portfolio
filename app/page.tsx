@@ -1,46 +1,32 @@
-import Link from "next/link";
+import { ExternalLink } from "@/components/ExternalLink";
 import { Prompt } from "@/components/Prompt";
-import { person, routes, externals } from "@/lib/content";
-
-const s = (i: number) => ({ "--i": i }) as React.CSSProperties;
+import { RouteChips } from "@/components/RouteChips";
+import { person, externals } from "@/lib/content";
+import { stagger } from "@/lib/stagger";
 
 export default function Home() {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise" style={s(0)}>
+      <header className="stack-s rise" style={stagger(0)}>
         <Prompt path="~" cmd="whoami" />
-        <h1 className="title">{person.name}</h1>
+        <h1 className="title">{person.name.toLowerCase()}</h1>
         <p className="subtitle">{person.role}</p>
       </header>
 
-      <section className="stack rise" style={s(1)}>
-        <p className="lede">{person.tagline}</p>
+      <section className="stack rise" style={stagger(1)}>
+        <p className="prose">{person.tagline}</p>
         <p className="muted">{person.status}</p>
       </section>
 
-      <section className="stack-s rise" style={s(2)}>
+      <section className="stack-s rise" style={stagger(2)}>
         <Prompt path="~" cmd="ls" />
-        <ul className="chip-row">
-          {routes.map((r) => (
-            <li key={r.path}>
-              <Link className="chip" href={r.path}>
-                {r.path}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <RouteChips />
         <ul className="chip-row">
           {externals.map((e) => (
             <li key={e.path}>
-              <a
-                className="chip"
-                data-variant="ghost"
-                href={e.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <ExternalLink className="chip" data-variant="ghost" href={e.href}>
                 {e.path}
-              </a>
+              </ExternalLink>
             </li>
           ))}
         </ul>

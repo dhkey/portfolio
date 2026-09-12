@@ -8,50 +8,66 @@ import { person, routes, externals } from "@/lib/content";
 type Row = { key: string; desc: string; here?: boolean };
 
 type Line =
-  | { kind: "in" | "out" | "err"; text: string; path?: string }
-  | { kind: "row"; row: Row };
+  | { kind: "in"; text: string; path: string }
+  | { kind: "out" | "err"; text: string }
+  | { kind: "table"; rows: Row[] };
 
-/** Rows whose command column runs past this stack on a phone instead of sitting two-up. */
+/** Tables whose command column runs past this stack on a phone instead of sitting two-up. */
 const WIDE_KEY = 16;
 
+// Lookups go through a Map, not an object, so `constructor` or `__proto__`
+// can't resolve to something inherited from Object.prototype.
 const INTERNAL = routes.map((r) => r.path.slice(1));
-const EXTERNAL = Object.fromEntries(
-  externals.map((e) => [e.path.slice(1), e.href]),
-);
+const EXTERNAL = new Map(externals.map((e) => [e.path.slice(1), e.href]));
 
-const HELP_ROWS: Row[] = [
-  { key: "ls", desc: "list every route" },
-  { key: INTERNAL.join(", "), desc: "open a page" },
-  { key: Object.keys(EXTERNAL).join(", "), desc: "open an external link" },
-  { key: "cd ~", desc: "back home" },
-  { key: "pwd", desc: "where you are" },
-  { key: "whoami", desc: "short bio" },
-  { key: "clear", desc: "clear the screen" },
+/** Other spellings of a command. `cd ~`, `cd ..`, `cd /`, `home` and `-` all walk back to the root. */
+const ALIASES = new Map([
+  ["?", "help"],
+  ["man", "help"],
+  ["ll", "ls"],
+  ["dir", "ls"],
+  ["", "~"],
+  ["home", "~"],
+  ["..", "~"],
+  ["-", "~"],
+]);
+
+/** Tab completes to the first of these that starts with what was typed. */
+const COMPLETIONS = [
+  ...INTERNAL,
+  ...EXTERNAL.keys(),
+  "help", "ls", "pwd", "whoami", "clear",
 ];
+
+function out(...texts: string[]): Line[] {
+  return texts.map((text): Line => ({ kind: "out", text }));
+}
 
 const HELP: Line[] = [
-  { kind: "out", text: "available commands" },
-  { kind: "out", text: "" },
-  ...HELP_ROWS.map((row): Line => ({ kind: "row", row })),
-  { kind: "out", text: "" },
-  { kind: "out", text: "tab completes · arrow up recalls history" },
+  ...out("available commands", ""),
+  {
+    kind: "table",
+    rows: [
+      { key: "ls", desc: "list every route" },
+      { key: INTERNAL.join(", "), desc: "open a page" },
+      { key: [...EXTERNAL.keys()].join(", "), desc: "open an external link" },
+      { key: "cd ~", desc: "back home" },
+      { key: "pwd", desc: "where you are" },
+      { key: "whoami", desc: "short bio" },
+      { key: "clear", desc: "clear the screen" },
+    ],
+  },
+  ...out("", "tab completes · arrow up recalls history"),
 ];
 
-function listing(here: string): Line[] {
-  return [
-    ...routes.map(
-      (r): Line => ({
-        kind: "row",
-        row: { key: r.path, desc: r.label, here: r.path === here },
-      }),
-    ),
-    ...externals.map(
-      (e): Line => ({
-        kind: "row",
-        row: { key: e.path, desc: "external link" },
-      }),
-    ),
-  ];
+function listing(route: string): Line {
+  return {
+    kind: "table",
+    rows: [
+      ...routes.map((r) => ({ key: r.path, desc: r.label, here: r.path === route })),
+      ...externals.map((e) => ({ key: e.path, desc: "external link" })),
+    ],
+  };
 }
 
 function normalise(raw: string): string {
@@ -77,27 +93,17 @@ function toPrompt(route: string): string {
   return route === "/" ? "~" : `~${route}`;
 }
 
-/** Consecutive table rows share one grid, so their columns line up. */
-function renderLog(lines: Line[]): React.ReactNode[] {
-  const out: React.ReactNode[] = [];
-
-  for (let i = 0; i < lines.length; ) {
-    const line = lines[i];
-
-    if (line.kind === "row") {
-      const start = i;
-      const rows: Row[] = [];
-      while (i < lines.length) {
-        const next = lines[i];
-        if (next.kind !== "row") break;
-        rows.push(next.row);
-        i++;
-      }
-      const wide = rows.some((r) => r.key.length > WIDE_KEY);
-      out.push(
-        <div key={start} className="term-table" data-wide={wide || undefined}>
-          {rows.map((row, j) => (
-            <Fragment key={j}>
+function LogLine({ line }: { line: Line }) {
+  switch (line.kind) {
+    case "table":
+      // One grid per table, so the columns line up across rows.
+      return (
+        <div
+          className="term-table"
+          data-wide={line.rows.some((r) => r.key.length > WIDE_KEY) || undefined}
+        >
+          {line.rows.map((row) => (
+            <Fragment key={row.key}>
               <span className="term-key">{row.key}</span>
               <span className="term-desc">
                 {row.desc}
@@ -107,27 +113,20 @@ function renderLog(lines: Line[]): React.ReactNode[] {
               </span>
             </Fragment>
           ))}
-        </div>,
+        </div>
       );
-      continue;
-    }
-
-    out.push(
-      <p key={i} className={`term-line term-${line.kind}`}>
-        {line.kind === "in" ? (
-          <>
-            <span className="path">{line.path}</span>
-            <span className="sigil">$</span> {line.text}
-          </>
-        ) : (
-          line.text || " "
-        )}
-      </p>,
-    );
-    i++;
+    case "in":
+      return (
+        <p className="term-line term-in">
+          <span className="path">{line.path}</span>
+          <span className="sigil">$</span> {line.text}
+        </p>
+      );
+    default:
+      return (
+        <p className={`term-line term-${line.kind}`}>{line.text || " "}</p>
+      );
   }
-
-  return out;
 }
 
 export function Terminal() {
@@ -147,12 +146,40 @@ export function Terminal() {
     logEndRef.current?.scrollIntoView({ block: "nearest" });
   }, [lines]);
 
-  const emit = (entry: string, out: Line[]) =>
-    setLines((prev) => [
-      ...prev,
-      { kind: "in", text: entry, path: here },
-      ...out,
-    ]);
+  function navigate(target: string): Line[] {
+    if (route === target) {
+      return out(target === "/" ? "already home" : `already at ${target}`);
+    }
+    router.push(target);
+    return out(`opening ${target} …`);
+  }
+
+  function execute(cmd: string): Line[] {
+    const name = ALIASES.get(cmd) ?? cmd;
+
+    switch (name) {
+      case "help":
+        return HELP;
+      case "ls":
+        return [listing(route)];
+      case "pwd":
+        return out(here);
+      case "whoami":
+        return out(person.name, person.role, person.location);
+      case "~":
+        return navigate("/");
+    }
+
+    if (INTERNAL.includes(name)) return navigate(`/${name}`);
+
+    const href = EXTERNAL.get(name);
+    if (href) {
+      window.open(href, "_blank", "noopener,noreferrer");
+      return out(`opening ${href} …`);
+    }
+
+    return [{ kind: "err", text: `command not found: ${cmd} - try \`help\`` }];
+  }
 
   function run(raw: string) {
     const entry = raw.trim();
@@ -162,88 +189,37 @@ export function Terminal() {
     setHistIndex(-1);
 
     const cmd = normalise(entry);
-
     if (cmd === "clear") {
       setLines([]);
       return;
     }
-    if (cmd === "help" || cmd === "?" || cmd === "man") {
-      emit(entry, HELP);
-      return;
-    }
-    if (cmd === "ls" || cmd === "ll" || cmd === "dir") {
-      emit(entry, listing(route));
-      return;
-    }
-    if (cmd === "pwd") {
-      emit(entry, [{ kind: "out", text: here }]);
-      return;
-    }
-    if (cmd === "whoami") {
-      emit(entry, [
-        { kind: "out", text: person.displayName },
-        { kind: "out", text: person.role },
-        { kind: "out", text: person.location },
-      ]);
-      return;
-    }
-    // `cd ~`, `cd ..`, `cd /`, `home`, `-` all walk back to the root.
-    if (cmd === "" || cmd === "~" || cmd === "home" || cmd === ".." || cmd === "-") {
-      if (route === "/") {
-        emit(entry, [{ kind: "out", text: "already home" }]);
-        return;
-      }
-      emit(entry, [{ kind: "out", text: "opening / …" }]);
-      router.push("/");
-      return;
-    }
-    if (INTERNAL.includes(cmd)) {
-      if (route === `/${cmd}`) {
-        emit(entry, [{ kind: "out", text: `already at /${cmd}` }]);
-        return;
-      }
-      emit(entry, [{ kind: "out", text: `opening /${cmd} …` }]);
-      router.push(`/${cmd}`);
-      return;
-    }
-    if (cmd in EXTERNAL) {
-      emit(entry, [{ kind: "out", text: `opening ${EXTERNAL[cmd]} …` }]);
-      window.open(EXTERNAL[cmd], "_blank", "noopener,noreferrer");
-      return;
-    }
-    emit(entry, [
-      { kind: "err", text: `command not found: ${cmd} - try \`help\`` },
-    ]);
+
+    const output = execute(cmd);
+    setLines((prev) => [...prev, { kind: "in", text: entry, path: here }, ...output]);
+  }
+
+  /** Show history entry `i` (0 is the newest), or an empty prompt at -1. */
+  function recall(i: number) {
+    setHistIndex(i);
+    setValue(i >= 0 ? history[i] : "");
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Tab") {
-      e.preventDefault();
-      const stem = normalise(value);
-      if (!stem) return;
-      const pool = [
-        ...INTERNAL,
-        ...Object.keys(EXTERNAL),
-        "help", "ls", "pwd", "whoami", "clear",
-      ];
-      const hit = pool.find((c) => c.startsWith(stem));
-      if (hit) setValue(hit);
-      return;
-    }
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      const next = Math.min(histIndex + 1, history.length - 1);
-      if (next >= 0) {
-        setHistIndex(next);
-        setValue(history[next]);
+    switch (e.key) {
+      case "Tab": {
+        e.preventDefault();
+        const stem = normalise(value);
+        const hit = stem && COMPLETIONS.find((c) => c.startsWith(stem));
+        if (hit) setValue(hit);
+        return;
       }
-      return;
-    }
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      const next = histIndex - 1;
-      setHistIndex(next);
-      setValue(next >= 0 ? history[next] : "");
+      case "ArrowUp":
+        e.preventDefault();
+        if (history.length) recall(Math.min(histIndex + 1, history.length - 1));
+        return;
+      case "ArrowDown":
+        e.preventDefault();
+        recall(Math.max(histIndex - 1, -1));
     }
   }
 
@@ -256,7 +232,9 @@ export function Terminal() {
       <div className="term-inner">
         {lines.length > 0 && (
           <div className="term-log" aria-live="polite">
-            {renderLog(lines)}
+            {lines.map((line, i) => (
+              <LogLine key={i} line={line} />
+            ))}
             <div ref={logEndRef} />
           </div>
         )}

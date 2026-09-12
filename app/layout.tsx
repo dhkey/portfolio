@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { Terminal } from "@/components/Terminal";
-import { person, siteUrl } from "@/lib/content";
+import { mailto, person, siteUrl } from "@/lib/content";
 import "./globals.css";
 
 const mono = JetBrains_Mono({
@@ -10,16 +10,18 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+const title = `${person.name} - Software Engineer & Systems Architect`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${person.displayName} - Software Engineer & Systems Architect`,
-    template: `%s - ${person.displayName}`,
+    default: title,
+    template: `%s - ${person.name}`,
   },
   description:
     "Denys Yazan - Software Engineer & Systems Architect in Prague. Full-stack engineer building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
-  authors: [{ name: person.displayName, url: siteUrl }],
-  creator: person.displayName,
+  authors: [{ name: person.name, url: siteUrl }],
+  creator: person.name,
   keywords: [
     "Denys Yazan", "software engineer", "Prague", "full-stack",
     "Next.js", "React", "TypeScript", "Python", "Django", "FastAPI",
@@ -30,14 +32,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: person.displayName,
-    title: `${person.displayName} - Software Engineer & Systems Architect`,
+    siteName: person.name,
+    title,
     description:
       "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
   },
   twitter: {
     card: "summary",
-    title: `${person.displayName} - Software Engineer & Systems Architect`,
+    title,
     description:
       "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, and Telegram bots.",
   },
@@ -51,9 +53,9 @@ export const viewport: Viewport = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: person.displayName,
+  name: person.name,
   jobTitle: "Software Engineer",
-  email: `mailto:${person.email}`,
+  email: mailto,
   telephone: person.phone,
   url: siteUrl,
   address: { "@type": "PostalAddress", addressLocality: "Prague", addressCountry: "CZ" },

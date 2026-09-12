@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
+import { Section } from "@/components/Section";
 import { skillGroups } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -18,8 +19,7 @@ export default function Skills() {
     >
       <div className="stack-m">
         {skillGroups.map((group) => (
-          <section key={group.label} className="stack-s">
-            <h2 className="section-head">{group.label}</h2>
+          <Section key={group.label} label={group.label}>
             <ul className="chip-row">
               {group.items.map((item) => (
                 <li key={item} className="chip" data-variant="ghost">
@@ -27,7 +27,7 @@ export default function Skills() {
                 </li>
               ))}
             </ul>
-          </section>
+          </Section>
         ))}
       </div>
     </PageShell>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { UrlLink } from "@/components/ExternalLink";
 import { PageShell } from "@/components/PageShell";
-import { person } from "@/lib/content";
+import { Section } from "@/components/Section";
+import { mailto, person } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -12,7 +14,7 @@ const rows: { key: string; value: React.ReactNode }[] = [
   {
     key: "email",
     value: (
-      <a className="link" href={`mailto:${person.email}`}>
+      <a className="link" href={mailto}>
         {person.email}
       </a>
     ),
@@ -26,22 +28,8 @@ const rows: { key: string; value: React.ReactNode }[] = [
     ),
   },
   { key: "location", value: <span className="muted">{person.location}</span> },
-  {
-    key: "linkedin",
-    value: (
-      <a className="link" href={person.linkedin} target="_blank" rel="noopener noreferrer">
-        {person.linkedinHandle} <span className="arrow">↗</span>
-      </a>
-    ),
-  },
-  {
-    key: "github",
-    value: (
-      <a className="link" href={person.github} target="_blank" rel="noopener noreferrer">
-        {person.githubHandle} <span className="arrow">↗</span>
-      </a>
-    ),
-  },
+  { key: "linkedin", value: <UrlLink href={person.linkedin} /> },
+  { key: "github", value: <UrlLink href={person.github} /> },
 ];
 
 export default function Contact() {
@@ -62,14 +50,13 @@ export default function Contact() {
           ))}
         </ul>
 
-        <section className="stack-s">
-          <h2 className="section-head">let&rsquo;s work together</h2>
+        <Section label="let’s work together">
           <div className="chip-row">
-            <a className="chip" href={`mailto:${person.email}`}>
+            <a className="chip" href={mailto}>
               ./send-email
             </a>
           </div>
-        </section>
+        </Section>
       </div>
     </PageShell>
   );

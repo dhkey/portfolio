@@ -12,7 +12,8 @@ npm run build    # production build + typecheck
 ## Editing content
 
 All copy lives in [`lib/content.ts`](lib/content.ts) — pages render from it, nothing is
-hardcoded in JSX. Adding a project = appending one object to the `projects` array.
+hardcoded in JSX. Adding a project = appending one object to the `projects` array; its
+link label is the `href` minus the protocol.
 
 `siteUrl` in that file feeds canonical URLs, Open Graph tags, `sitemap.xml` and
 `robots.txt`, so it must match the production domain.
@@ -30,8 +31,13 @@ app/
 components/
   Terminal.tsx      the only client component — ls, help, cd <page>, tab, history
   Prompt.tsx        the `user@host:~$ cmd` chrome line
-  PageShell.tsx     shared frame for inner pages
-lib/content.ts      all site copy
+  PageShell.tsx     shared frame for inner pages and the 404
+  Section.tsx       a labelled block under a `── heading ──` rule
+  RouteChips.tsx    chip row of every inner page
+  ExternalLink.tsx  new-tab anchor, plus UrlLink labelled with its own URL
+lib/
+  content.ts        all site copy
+  stagger.ts        per-element delay for the `.rise` entrance animation
 ```
 
 ## Things worth knowing
