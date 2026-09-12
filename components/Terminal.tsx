@@ -1,48 +1,57 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { person, routes, externals } from "@/lib/content";
 
-type Line = { kind: "in" | "out" | "err"; text: string; path?: string };
+/** A two-column row of the `help` / `ls` tables. */
+type Row = { key: string; desc: string; here?: boolean };
+
+type Line =
+  | { kind: "in" | "out" | "err"; text: string; path?: string }
+  | { kind: "row"; row: Row };
+
+/** Rows whose command column runs past this stack on a phone instead of sitting two-up. */
+const WIDE_KEY = 16;
 
 const INTERNAL = routes.map((r) => r.path.slice(1));
 const EXTERNAL = Object.fromEntries(
   externals.map((e) => [e.path.slice(1), e.href]),
 );
 
-function helpTable(): string[] {
-  const rows: [string, string][] = [
-    ["ls", "list every route"],
-    [INTERNAL.join(", "), "open a page"],
-    [Object.keys(EXTERNAL).join(", "), "open an external link"],
-    ["cd ~", "back home"],
-    ["pwd", "where you are"],
-    ["whoami", "short bio"],
-    ["clear", "clear the screen"],
-  ];
-  const width = Math.max(...rows.map(([cmd]) => cmd.length));
+const HELP_ROWS: Row[] = [
+  { key: "ls", desc: "list every route" },
+  { key: INTERNAL.join(", "), desc: "open a page" },
+  { key: Object.keys(EXTERNAL).join(", "), desc: "open an external link" },
+  { key: "cd ~", desc: "back home" },
+  { key: "pwd", desc: "where you are" },
+  { key: "whoami", desc: "short bio" },
+  { key: "clear", desc: "clear the screen" },
+];
+
+const HELP: Line[] = [
+  { kind: "out", text: "available commands" },
+  { kind: "out", text: "" },
+  ...HELP_ROWS.map((row): Line => ({ kind: "row", row })),
+  { kind: "out", text: "" },
+  { kind: "out", text: "tab completes · arrow up recalls history" },
+];
+
+function listing(here: string): Line[] {
   return [
-    "available commands",
-    "",
-    ...rows.map(([cmd, desc]) => `  ${cmd.padEnd(width + 3)}${desc}`),
-    "",
-    "tab completes · arrow up recalls history",
+    ...routes.map(
+      (r): Line => ({
+        kind: "row",
+        row: { key: r.path, desc: r.label, here: r.path === here },
+      }),
+    ),
+    ...externals.map(
+      (e): Line => ({
+        kind: "row",
+        row: { key: e.path, desc: "external link" },
+      }),
+    ),
   ];
-}
-
-const HELP: string[] = helpTable();
-
-function listing(here: string): string[] {
-  const rows: [string, string][] = [
-    ...routes.map((r) => [r.path, r.label] as [string, string]),
-    ...externals.map((e) => [e.path, "external link"] as [string, string]),
-  ];
-  const width = Math.max(...rows.map(([path]) => path.length));
-  return rows.map(
-    ([path, desc]) =>
-      `${path.padEnd(width + 3)}${desc}${path === here ? "  ← you are here" : ""}`,
-  );
 }
 
 function normalise(raw: string): string {
@@ -66,6 +75,59 @@ function toRoute(pathname: string): string {
 /** "/skills" -> "~/skills", "/" -> "~" */
 function toPrompt(route: string): string {
   return route === "/" ? "~" : `~${route}`;
+}
+
+/** Consecutive table rows share one grid, so their columns line up. */
+function renderLog(lines: Line[]): React.ReactNode[] {
+  const out: React.ReactNode[] = [];
+
+  for (let i = 0; i < lines.length; ) {
+    const line = lines[i];
+
+    if (line.kind === "row") {
+      const start = i;
+      const rows: Row[] = [];
+      while (i < lines.length) {
+        const next = lines[i];
+        if (next.kind !== "row") break;
+        rows.push(next.row);
+        i++;
+      }
+      const wide = rows.some((r) => r.key.length > WIDE_KEY);
+      out.push(
+        <div key={start} className="term-table" data-wide={wide || undefined}>
+          {rows.map((row, j) => (
+            <Fragment key={j}>
+              <span className="term-key">{row.key}</span>
+              <span className="term-desc">
+                {row.desc}
+                {row.here ? (
+                  <span className="term-mark">{" ← you are here"}</span>
+                ) : null}
+              </span>
+            </Fragment>
+          ))}
+        </div>,
+      );
+      continue;
+    }
+
+    out.push(
+      <p key={i} className={`term-line term-${line.kind}`}>
+        {line.kind === "in" ? (
+          <>
+            <span className="path">{line.path}</span>
+            <span className="sigil">$</span> {line.text}
+          </>
+        ) : (
+          line.text || " "
+        )}
+      </p>,
+    );
+    i++;
+  }
+
+  return out;
 }
 
 export function Terminal() {
@@ -106,11 +168,11 @@ export function Terminal() {
       return;
     }
     if (cmd === "help" || cmd === "?" || cmd === "man") {
-      emit(entry, HELP.map((text) => ({ kind: "out", text }) as Line));
+      emit(entry, HELP);
       return;
     }
     if (cmd === "ls" || cmd === "ll" || cmd === "dir") {
-      emit(entry, listing(route).map((text) => ({ kind: "out", text }) as Line));
+      emit(entry, listing(route));
       return;
     }
     if (cmd === "pwd") {
@@ -194,18 +256,7 @@ export function Terminal() {
       <div className="term-inner">
         {lines.length > 0 && (
           <div className="term-log" aria-live="polite">
-            {lines.map((line, i) => (
-              <p key={i} className={`term-line term-${line.kind}`}>
-                {line.kind === "in" ? (
-                  <>
-                    <span className="path">{line.path}</span>
-                    <span className="sigil">$</span> {line.text}
-                  </>
-                ) : (
-                  line.text || " "
-                )}
-              </p>
-            ))}
+            {renderLog(lines)}
             <div ref={logEndRef} />
           </div>
         )}
@@ -231,6 +282,7 @@ export function Terminal() {
             onKeyDown={onKeyDown}
             placeholder="type `help`"
             autoComplete="off"
+            enterKeyHint="go"
             autoCapitalize="off"
             autoCorrect="off"
             spellCheck={false}

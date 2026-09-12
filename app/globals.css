@@ -411,6 +411,26 @@ a.chip[data-variant="ghost"]:focus-visible {
 .term-err { color: #ff8a80; }
 .term-in  { color: var(--fg); }
 
+/* `help` / `ls` tables — a real grid, so columns stay put when a cell wraps */
+.term-table {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  column-gap: 1.5rem;
+  font-size: 0.8125rem;
+}
+.term-key  { color: var(--fg); }
+.term-desc { color: var(--fg-dim); }
+.term-mark { color: var(--accent-dim); }
+
+/* a long command column leaves no room for a second one on a phone */
+@media (max-width: 34rem) {
+  .term-table[data-wide] { grid-template-columns: minmax(0, 1fr); }
+  .term-table[data-wide] .term-desc {
+    padding-left: 2ch;
+    padding-bottom: 0.35rem;
+  }
+}
+
 .term-form {
   display: flex;
   align-items: baseline;
@@ -444,6 +464,12 @@ a.chip[data-variant="ghost"]:focus-visible {
 .term-input::placeholder { color: var(--fg-faint); }
 .term-input:focus { outline: none; }
 .term-form:focus-within .sigil { color: var(--accent); }
+
+/* iOS zooms the page into any field it focuses below 16px — hold the prompt row at 1rem */
+@media (pointer: coarse) {
+  .term-ps1,
+  .term-input { font-size: 1rem; }
+}
 
 .bio {
   display: flex;
