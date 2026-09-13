@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PageShell } from "./PageShell";
+import { ExternalLink } from "./ExternalLink";
 import { projects, projectTypes, type ProjectType } from "@/lib/content";
 
 type Filter = ProjectType | "all";
@@ -85,14 +86,7 @@ export function ProjectsView() {
               <p className="entry-summary">{p.summary}</p>
               <div className="entry-meta">
                 <span className="tags">{p.tags.join(" · ")}</span>
-                <a
-                  className="link"
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {p.linkLabel} <span className="arrow">↗</span>
-                </a>
+                <ExternalLink href={p.href}>{p.linkLabel}</ExternalLink>
               </div>
             </li>
           ))}

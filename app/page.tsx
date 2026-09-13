@@ -1,24 +1,23 @@
 import Link from "next/link";
 import { Prompt } from "@/components/Prompt";
 import { person, routes, externals } from "@/lib/content";
-
-const s = (i: number) => ({ "--i": i }) as React.CSSProperties;
+import { rise } from "@/lib/rise";
 
 export default function Home() {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise" style={s(0)}>
+      <header className="stack-s rise" style={rise(0)}>
         <Prompt path="~" cmd="whoami" />
         <h1 className="title">{person.name}</h1>
         <p className="subtitle">{person.role}</p>
       </header>
 
-      <section className="stack rise" style={s(1)}>
+      <section className="stack rise" style={rise(1)}>
         <p className="lede">{person.tagline}</p>
         <p className="muted">{person.status}</p>
       </section>
 
-      <section className="stack-s rise" style={s(2)}>
+      <section className="stack-s rise" style={rise(2)}>
         <Prompt path="~" cmd="ls" />
         <ul className="chip-row">
           {routes.map((r) => (

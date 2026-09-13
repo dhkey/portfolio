@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
+import { ExternalLink } from "@/components/ExternalLink";
 import { person } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -28,19 +29,11 @@ const rows: { key: string; value: React.ReactNode }[] = [
   { key: "location", value: <span className="muted">{person.location}</span> },
   {
     key: "linkedin",
-    value: (
-      <a className="link" href={person.linkedin} target="_blank" rel="noopener noreferrer">
-        {person.linkedinHandle} <span className="arrow">↗</span>
-      </a>
-    ),
+    value: <ExternalLink href={person.linkedin}>{person.linkedinHandle}</ExternalLink>,
   },
   {
     key: "github",
-    value: (
-      <a className="link" href={person.github} target="_blank" rel="noopener noreferrer">
-        {person.githubHandle} <span className="arrow">↗</span>
-      </a>
-    ),
+    value: <ExternalLink href={person.github}>{person.githubHandle}</ExternalLink>,
   },
 ];
 
