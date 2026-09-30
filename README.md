@@ -30,7 +30,6 @@ Blog posts are Markdown files, not entries in `content.ts`. To publish one:
    title: My post
    date: 2026-10-05
    summary: One sentence shown on the /blog listing and used as the meta description.
-   tags: [nextjs, notes]
    ---
 
    Body goes here. Headings, **bold**, _italic_, links, lists, `code`,
@@ -41,8 +40,7 @@ Blog posts are Markdown files, not entries in `content.ts`. To publish one:
    static HTML — there's no draft state, so don't add the file until it's ready to publish.
 
 That's it — no code changes, no registering the post anywhere. `date` controls sort
-order on the listing (newest first) and `tags` are optional; leave the array empty
-(`tags: []`) or omit it if a post doesn't need any.
+order on the listing (newest first).
 
 ## Layout
 

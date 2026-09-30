@@ -10,7 +10,6 @@ export type PostMeta = {
   title: string;
   date: string;
   summary: string;
-  tags: string[];
 };
 
 export type Post = PostMeta & { html: string };
@@ -30,7 +29,6 @@ function readMeta(slug: string): PostMeta {
     title: data.title as string,
     date: data.date instanceof Date ? data.date.toISOString().slice(0, 10) : String(data.date),
     summary: (data.summary as string) ?? "",
-    tags: (data.tags as string[]) ?? [],
   };
 }
 
@@ -53,7 +51,6 @@ export function getPost(slug: string): Post | null {
     title: data.title as string,
     date: data.date instanceof Date ? data.date.toISOString().slice(0, 10) : String(data.date),
     summary: (data.summary as string) ?? "",
-    tags: (data.tags as string[]) ?? [],
     html,
   };
 }

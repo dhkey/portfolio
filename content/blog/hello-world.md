@@ -2,7 +2,6 @@
 title: Hello, world
 date: 2026-09-30
 summary: Why I'm adding a blog to this site, and what I plan to write about here.
-tags: [meta]
 ---
 
 I'm adding a blog section to this site so I have somewhere to write down

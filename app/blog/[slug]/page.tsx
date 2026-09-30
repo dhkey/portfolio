@@ -45,18 +45,7 @@ export default async function BlogPost({
       title={post.title}
       intro={post.date}
     >
-      <div className="stack-m">
-        {post.tags.length > 0 ? (
-          <ul className="chip-row">
-            {post.tags.map((t) => (
-              <li key={t} className="chip" data-variant="ghost">
-                {t}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
-      </div>
+      <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
     </PageShell>
   );
 }

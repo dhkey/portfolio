@@ -32,11 +32,6 @@ export default function Blog() {
                   <h2 className="entry-name">{p.title}</h2>
                 </div>
                 {p.summary ? <p className="entry-summary">{p.summary}</p> : null}
-                {p.tags.length > 0 ? (
-                  <div className="entry-meta">
-                    <span className="tags">{p.tags.join(" · ")}</span>
-                  </div>
-                ) : null}
               </Link>
             </li>
           ))}
