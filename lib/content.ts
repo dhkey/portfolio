@@ -221,6 +221,7 @@ export const languages: { name: string; level: string }[] = [
 
 export const routes: { path: string; label: string }[] = [
   { path: "/projects", label: "what I have shipped" },
+  { path: "/blog", label: "notes and write-ups" },
   { path: "/skills", label: "the toolkit" },
   { path: "/about", label: "background" },
   { path: "/contact", label: "how to reach me" },

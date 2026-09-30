@@ -17,6 +17,33 @@ hardcoded in JSX. Adding a project = appending one object to the `projects` arra
 `siteUrl` in that file feeds canonical URLs, Open Graph tags, `sitemap.xml` and
 `robots.txt`, so it must match the production domain.
 
+## Writing a blog post
+
+Blog posts are Markdown files, not entries in `content.ts`. To publish one:
+
+1. Add a new file to [`content/blog/`](content/blog), named `your-slug.md` — the
+   filename becomes the URL, e.g. `content/blog/my-post.md` → `/blog/my-post`.
+2. Start it with frontmatter, then write the post below in Markdown:
+
+   ```md
+   ---
+   title: My post
+   date: 2026-10-05
+   summary: One sentence shown on the /blog listing and used as the meta description.
+   tags: [nextjs, notes]
+   ---
+
+   Body goes here. Headings, **bold**, _italic_, links, lists, `code`,
+   fenced code blocks and blockquotes are all supported.
+   ```
+
+3. `npm run dev` and check it at `/blog/your-slug`. `npm run build` prerenders it as
+   static HTML — there's no draft state, so don't add the file until it's ready to publish.
+
+That's it — no code changes, no registering the post anywhere. `date` controls sort
+order on the listing (newest first) and `tags` are optional; leave the array empty
+(`tags: []`) or omit it if a post doesn't need any.
+
 ## Layout
 
 ```
@@ -24,6 +51,8 @@ app/
   layout.tsx        root shell, fonts, metadata, JSON-LD
   page.tsx          index / interactive prompt
   projects|skills|about|contact/page.tsx
+  blog/page.tsx      blog listing
+  blog/[slug]/page.tsx  individual post
   not-found.tsx     404
   globals.css       design tokens + every component style
   sitemap.ts robots.ts
@@ -31,7 +60,9 @@ components/
   Terminal.tsx      the only client component — ls, help, cd <page>, tab, history
   Prompt.tsx        the `user@host:~$ cmd` chrome line
   PageShell.tsx     shared frame for inner pages
-lib/content.ts      all site copy
+lib/content.ts      all site copy (except blog posts)
+lib/posts.ts        reads and parses content/blog/*.md
+content/blog/        blog posts, one Markdown file per post
 ```
 
 ## Things worth knowing

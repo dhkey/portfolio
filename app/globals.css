@@ -149,6 +149,84 @@ img { max-width: 100%; display: block; }
 
 .prose { max-width: var(--prose); }
 
+.prose :is(h1, h2, h3, h4) {
+  margin-top: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+.prose :is(h1, h2, h3, h4):first-child { margin-top: 0; }
+.prose h2 { font-size: 1.15rem; }
+.prose h3 { font-size: 1rem; }
+
+.prose p { margin-top: 1.1rem; }
+.prose p:first-child { margin-top: 0; }
+
+.prose a {
+  color: var(--fg);
+  border-bottom: 1px solid var(--line-hi);
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+.prose a:hover,
+.prose a:focus-visible { border-color: var(--accent); color: var(--accent); }
+
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { font-style: italic; }
+
+.prose :is(ul, ol) {
+  margin-top: 1.1rem;
+  padding-left: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li::marker { color: var(--fg-faint); }
+
+.prose blockquote {
+  margin-top: 1.1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--line-hi);
+  color: var(--fg-dim);
+}
+
+.prose code {
+  font-size: 0.85em;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.1em 0.35em;
+}
+
+.prose pre {
+  margin-top: 1.1rem;
+  padding: 0.9rem 1rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 0.8125rem;
+}
+
+.prose hr {
+  margin-top: 1.5rem;
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+.prose img {
+  margin-top: 1.1rem;
+  border: 1px solid var(--line-hi);
+  border-radius: var(--radius);
+}
+
 .muted { color: var(--fg-dim); }
 .faint { color: var(--fg-faint); }
 
@@ -267,6 +345,12 @@ a.chip[data-variant="ghost"]:focus-visible {
 }
 .entry:hover::before,
 .entry:focus-within::before { background: var(--accent); }
+
+a.entry-link { cursor: pointer; }
+a.entry-link:hover::before,
+a.entry-link:focus-visible::before { background: var(--accent); }
+a.entry-link:hover .entry-name,
+a.entry-link:focus-visible .entry-name { color: var(--accent); }
 
 .entry-head {
   display: flex;
