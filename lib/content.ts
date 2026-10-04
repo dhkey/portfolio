@@ -50,13 +50,13 @@ export const projects: Project[] = [
     linkLabel: "fabrics.od.ua",
   },
   {
-    name: "denys-yazan.lol",
+    name: "denys-yazan.dev",
     type: "web",
     summary:
       "This site. Terminal-styled personal portfolio with an interactive prompt - ls, cd, tab completion and history. Next.js App Router on React 19 and TypeScript, fully prerendered, no dependencies beyond the framework.",
     tags: ["next.js", "react", "typescript", "static-site"],
-    href: "https://denys-yazan.lol",
-    linkLabel: "denys-yazan.lol",
+    href: "https://denys-yazan.dev",
+    linkLabel: "denys-yazan.dev",
   },
   {
     name: "stav-pro.cz",
@@ -233,4 +233,4 @@ export const externals: { path: string; href: string }[] = [
   { path: "/email", href: `mailto:${person.email}` },
 ];
 
-export const siteUrl = "https://denys-yazan.lol";
+export const siteUrl = "https://denys-yazan.dev";
