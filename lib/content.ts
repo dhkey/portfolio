@@ -41,6 +41,15 @@ export const projects: Project[] = [
     linkLabel: "smstogo.net",
   },
   {
+    name: "Beacon - Better MacOS's Spotlight.",
+    type: "macos",
+    summary:
+      "Native macOS application launcher. Menu-bar SwiftUI/AppKit app with a global hotkey, diacritic-insensitive fuzzy search across installed apps, keyboard navigation and web-search fallback - shipped as universal DMG/PKG builds from a tagged GitHub Actions release pipeline.",
+    tags: ["swift", "swiftui", "macos", "desktop", "next.js", "react", "typescript", "static-site", ],
+    href: "https://beacon.denys-yazan.dev",
+    linkLabel: "beacon.denys-yazan.dev",
+  },
+  {
     name: "fabrics.od.ua",
     type: "web",
     summary:
@@ -66,15 +75,6 @@ export const projects: Project[] = [
     tags: ["html/css", "javascript", "telegram-api", "landing"],
     href: "https://stav-pro.cz",
     linkLabel: "stav-pro.cz",
-  },
-  {
-    name: "Beacon",
-    type: "macos",
-    summary:
-      "Native macOS application launcher. Menu-bar SwiftUI/AppKit app with a global hotkey, diacritic-insensitive fuzzy search across installed apps, keyboard navigation and web-search fallback - shipped as universal DMG/PKG builds from a tagged GitHub Actions release pipeline.",
-    tags: ["swift", "swiftui", "macos", "desktop"],
-    href: "https://github.com/dhkey/Beacon",
-    linkLabel: "github.com/dhkey/Beacon",
   },
   {
     name: "SideMouseButtons",
