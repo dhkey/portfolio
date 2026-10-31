@@ -14,3 +14,6 @@ next-env.d.ts
 *.pem
 .env*
 !.env.example
+
+#ide
+.vscode
