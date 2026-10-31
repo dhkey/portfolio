@@ -13,21 +13,27 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Denys Yazan - software engineer and systems architect in Prague. Software Engineer Intern at make.com, studying Software Engineering at CTU Prague.",
+    "Denys Yazan - software engineer and systems architect in Prague. Software Engineer at make.com, studying Software Engineering at CTU Prague.",
 };
 
-function Timeline({ title, entries }: { title: string; entries: TimelineEntry[] }) {
+function Timeline({
+  title,
+  entries,
+}: {
+  title: string;
+  entries: TimelineEntry[];
+}) {
   return (
     <section className="stack-s">
       <h2 className="section-head">{title}</h2>
       <ul className="tl-list">
-        {entries.map((e) => (
-          <li key={e.title} className="tl">
-            <span className="tl-period">{e.period}</span>
+        {entries.map((entry) => (
+          <li key={entry.title} className="tl">
+            <span className="tl-period">{entry.period}</span>
             <span>
-              <span className="tl-title">{e.title}</span>
+              <span className="tl-title">{entry.title}</span>
               <br />
-              <span className="tl-detail">{e.detail}</span>
+              <span className="tl-detail">{entry.detail}</span>
             </span>
           </li>
         ))}
@@ -38,11 +44,7 @@ function Timeline({ title, entries }: { title: string; entries: TimelineEntry[] 
 
 export default function About() {
   return (
-    <PageShell
-      path="~/about"
-      cmd="cat about.md"
-      title="about"
-    >
+    <PageShell path="~/about" cmd="cat about.md" title="about">
       <div className="stack-m">
         <section className="bio">
           <Image

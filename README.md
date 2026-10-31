@@ -52,12 +52,13 @@ app/
   blog/page.tsx      blog listing
   blog/[slug]/page.tsx  individual post
   not-found.tsx     404
-  globals.css       design tokens + every component style
   sitemap.ts robots.ts
 components/
   Terminal.tsx      the only client component — ls, help, cd <page>, tab, history
   Prompt.tsx        the `user@host:~$ cmd` chrome line
   PageShell.tsx     shared frame for inner pages
+styles/
+  globals.css       design tokens + every component style
 lib/content.ts      all site copy (except blog posts)
 lib/posts.ts        reads and parses content/blog/*.md
 content/blog/        blog posts, one Markdown file per post

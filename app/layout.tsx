@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Terminal } from "@/components/Terminal";
 import { person, siteUrl } from "@/lib/content";
-import "./globals.css";
+import "@/styles/globals.css";
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -23,9 +23,18 @@ export const metadata: Metadata = {
   authors: [{ name: person.displayName, url: siteUrl }],
   creator: person.displayName,
   keywords: [
-    "Denys Yazan", "software engineer", "Prague", "full-stack",
-    "Next.js", "React", "TypeScript", "Python", "Django", "FastAPI",
-    "Telegram bots", "systems architect",
+    "Denys Yazan",
+    "software engineer",
+    "Prague",
+    "full-stack",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Python",
+    "Django",
+    "FastAPI",
+    "Telegram bots",
+    "systems architect",
   ],
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
@@ -58,10 +67,17 @@ const personJsonLd = {
   email: `mailto:${person.email}`,
   telephone: person.phone,
   url: siteUrl,
-  address: { "@type": "PostalAddress", addressLocality: "Prague", addressCountry: "CZ" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Prague",
+    addressCountry: "CZ",
+  },
   sameAs: [person.github, person.linkedin],
   worksFor: { "@type": "Organization", name: "make.com" },
-  alumniOf: { "@type": "CollegeOrUniversity", name: "Czech Technical University in Prague" },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Czech Technical University in Prague",
+  },
 };
 
 export default function RootLayout({
