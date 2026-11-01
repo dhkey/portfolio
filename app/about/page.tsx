@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { PageShell } from "@/components/PageShell";
 import {
@@ -9,12 +8,6 @@ import {
   languages,
   type TimelineEntry,
 } from "@/content/person";
-
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Denys Yazan - software engineer and systems architect in Prague. Software Engineer at make.com, studying Software Engineering at CTU Prague.",
-};
 
 export default function About() {
   return (

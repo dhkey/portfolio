@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
 import { ExternalLink } from "@/components/ExternalLink";
 import { contacts, person } from "@/content/person";
-
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Get in touch with Denys Yazan - email, phone, LinkedIn and GitHub. Based in Prague, open to new opportunities and collaboration.",
-};
 
 function contactValue({ label, href }: (typeof contacts)[number]) {
   if (!href) return <span className="muted">{label}</span>; // location row

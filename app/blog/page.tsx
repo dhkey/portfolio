@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
 import { getAllBlogs } from "@/lib/blogs";
-
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "Notes and write-ups by Denys Yazan - engineering, projects and whatever else is worth putting into words.",
-};
 
 export default function Blog() {
   const blogs = getAllBlogs();

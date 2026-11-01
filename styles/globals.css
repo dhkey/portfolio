@@ -302,7 +302,7 @@ a.chip[data-variant="ghost"]:focus-visible {
   background: var(--bg-raised-hi);
   color: var(--fg);
 }
-.flag[aria-pressed="true"] {
+.flag[aria-current="page"] {
   background: rgba(126, 231, 135, 0.08);
   border-color: var(--accent-dim);
   color: var(--accent);
@@ -312,7 +312,7 @@ a.chip[data-variant="ghost"]:focus-visible {
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
 }
-.flag[aria-pressed="true"] .flag-count { color: var(--accent-dim); }
+.flag[aria-current="page"] .flag-count { color: var(--accent-dim); }
 
 .total {
   color: var(--fg-faint);
