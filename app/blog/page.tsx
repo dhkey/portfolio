@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
-import { getAllPosts } from "@/lib/posts";
+import { getAllBlogs } from "@/lib/blogs";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  const posts = getAllPosts();
+  const posts = getAllBlogs();
 
   return (
     <PageShell

@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="page stack-l">
-      <header className="stack-s">
+      <header>
         <Prompt path="~" cmd="cd ./nowhere" />
-        <h1 className="title">404</h1>
+        <h1>404</h1>
         <p className="muted">no such file or directory</p>
       </header>
 

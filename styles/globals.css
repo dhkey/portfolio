@@ -99,7 +99,9 @@ img { max-width: 100%; display: block; }
 }
 
 .stack   { display: flex; flex-direction: column; gap: var(--gap); }
-.stack-s { display: flex; flex-direction: column; gap: 0.5rem; }
+.stack-s,
+.page > header,
+.page > footer { display: flex; flex-direction: column; gap: 0.5rem; }
 .stack-m { display: flex; flex-direction: column; gap: 2.25rem; }
 .stack-l { display: flex; flex-direction: column; gap: 3rem; }
 
@@ -130,7 +132,7 @@ img { max-width: 100%; display: block; }
 }
 @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 
-.title {
+h1 {
   font-size: clamp(1.65rem, 6vw, 2.1rem);
   font-weight: 700;
   letter-spacing: -0.035em;

@@ -6,9 +6,9 @@ import { routes, externals } from "@/content/site";
 export default function Home() {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise">
+      <header className="rise">
         <Prompt path="~" cmd="whoami" />
-        <h1 className="title">{person.name}</h1>
+        <h1>{person.name}</h1>
         <p className="subtitle">{person.role}</p>
       </header>
 

@@ -5,14 +5,14 @@ import { marked } from "marked";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
-export type PostMeta = {
+export type blogMeta = {
   slug: string;
   title: string;
   date: string;
   summary: string;
 };
 
-export type Post = PostMeta & { html: string };
+export type blog = blogMeta & { html: string };
 
 function readSlugs(): string[] {
   return fs
@@ -21,7 +21,7 @@ function readSlugs(): string[] {
     .map((f) => f.replace(/\.md$/, ""));
 }
 
-function readMeta(slug: string): PostMeta {
+function readMeta(slug: string): blogMeta {
   const raw = fs.readFileSync(path.join(BLOG_DIR, `${slug}.md`), "utf8");
   const { data } = matter(raw);
   return {
@@ -32,13 +32,13 @@ function readMeta(slug: string): PostMeta {
   };
 }
 
-export function getAllPosts(): PostMeta[] {
+export function getAllBlogs(): blogMeta[] {
   return readSlugs()
     .map(readMeta)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getPost(slug: string): Post | null {
+export function getBlog(slug: string): blog | null {
   const file = path.join(BLOG_DIR, `${slug}.md`);
   if (!fs.existsSync(file)) return null;
 

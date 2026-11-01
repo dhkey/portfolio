@@ -16,9 +16,9 @@ export function PageShell({
 }>) {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise">
+      <header className="rise">
         <Prompt path={path} cmd={cmd} />
-        <h1 className="title">{title}</h1>
+        <h1>{title}</h1>
         {intro ? <p className="muted lede">{intro}</p> : null}
       </header>
 
@@ -26,7 +26,7 @@ export function PageShell({
         {children}
       </div>
 
-      <footer className="stack-s rise">
+      <footer className="rise">
         <hr className="rule" />
         <div className="chip-row">
           <Link className="chip" href="/">

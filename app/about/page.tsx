@@ -16,50 +16,20 @@ export const metadata: Metadata = {
     "Denys Yazan - software engineer and systems architect in Prague. Software Engineer at make.com, studying Software Engineering at CTU Prague.",
 };
 
-function Timeline({
-  title,
-  entries,
-}: Readonly<{
-  title: string;
-  entries: TimelineEntry[];
-}>) {
-  return (
-    <section className="stack-s">
-      <h2 className="section-head">{title}</h2>
-      <ul className="tl-list">
-        {entries.map((entry) => (
-          <li key={entry.title} className="tl">
-            <span className="tl-period">{entry.period}</span>
-            <span>
-              <span className="tl-title">{entry.title}</span>
-              <br />
-              <span className="tl-detail">{entry.detail}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 export default function About() {
   return (
     <PageShell path="~/about" cmd="cat about.md" title="about">
       <div className="stack-m">
+
         <section className="bio">
           <Image
             className="avatar"
-            src={person.avatar}
-            alt={`Portrait of ${person.displayName}`}
-            width={88}
-            height={88}
-            priority
+            src={person.avatar} alt={`Portrait of ${person.displayName}`}
+            width={88} height={88} priority
           />
           <div className="stack-s prose">
-            {about.bio.map((para) => (
-              <p key={para.slice(0, 24)} className="muted">
-                {para}
-              </p>
+            {about.bio.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)} className="muted"> {paragraph} </p>
             ))}
           </div>
         </section>
@@ -82,5 +52,26 @@ export default function About() {
         </section>
       </div>
     </PageShell>
+  );
+}
+
+function Timeline({ title, entries }: Readonly<{ title: string; entries: TimelineEntry[] }>) 
+{
+  return (
+    <section className="stack-s">
+      <h2 className="section-head">{title}</h2>
+      <ul className="tl-list">
+        {entries.map((entry) => (
+          <li key={entry.title} className="tl">
+            <span className="tl-period">{entry.period}</span>
+            <span>
+              <span className="tl-title">{entry.title}</span>
+              <br />
+              <span className="tl-detail">{entry.detail}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

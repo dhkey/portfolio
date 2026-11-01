@@ -1,51 +1,47 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/PageShell";
-import { getAllPosts, getPost } from "@/lib/posts";
+import { getAllBlogs, getBlog } from "@/lib/blogs";
 
 export function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+  return getAllBlogs().map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: Readonly<{
+export async function generateMetadata({ params }: Readonly<{
   params: Promise<{ slug: string }>;
 }>): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
-  if (!post) return {};
+  const blog = getBlog(slug);
+  if (!blog) return {};
 
   return {
-    title: post.title,
-    description: post.summary,
-    alternates: { canonical: `/blog/${post.slug}` },
+    title: blog.title,
+    description: blog.summary,
+    alternates: { canonical: `/blog/${blog.slug}` },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.summary,
-      publishedTime: post.date,
+      title: blog.title,
+      description: blog.summary,
+      publishedTime: blog.date,
     },
   };
 }
 
-export default async function BlogPost({
-  params,
-}: Readonly<{
+export default async function Blogblog({ params }: Readonly<{
   params: Promise<{ slug: string }>;
 }>) {
   const { slug } = await params;
-  const post = getPost(slug);
-  if (!post) notFound();
+  const blog = getBlog(slug);
+  if (!blog) notFound();
 
   return (
     <PageShell
-      path={`~/blog/${post.slug}`}
-      cmd="cat post.md"
-      title={post.title}
-      intro={post.date}
+      path={`~/blog/${blog.slug}`}
+      cmd="cat blog.md"
+      title={blog.title}
+      intro={blog.date}
     >
-      <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+      <div className="prose" dangerouslySetInnerHTML={{ __html: blog.html }} />
     </PageShell>
   );
 }
