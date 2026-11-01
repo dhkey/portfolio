@@ -8,13 +8,13 @@ export function PageShell({
   title,
   intro,
   children,
-}: {
+}: Readonly<{
   path: string;
   cmd: React.ReactNode;
   title: string;
   intro?: string;
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <main className="page stack-l">
       <header className="stack-s rise" style={rise(0)}>

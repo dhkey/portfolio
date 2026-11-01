@@ -4,11 +4,11 @@ export function Prompt({
   path = "~",
   cmd,
   cursor = false,
-}: {
+}: Readonly<{
   path?: string;
   cmd?: React.ReactNode;
   cursor?: boolean;
-}) {
+}>) {
   return (
     <p className="prompt" aria-hidden="true">
       <span className="faint">{person.user}@{person.host}</span>

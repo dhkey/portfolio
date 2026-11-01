@@ -19,10 +19,10 @@ export const metadata: Metadata = {
 function Timeline({
   title,
   entries,
-}: {
+}: Readonly<{
   title: string;
   entries: TimelineEntry[];
-}) {
+}>) {
   return (
     <section className="stack-s">
       <h2 className="section-head">{title}</h2>
