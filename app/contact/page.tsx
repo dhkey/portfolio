@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
 import { ExternalLink } from "@/components/ExternalLink";
-import { person } from "@/lib/content";
+import { person } from "@/content/person";
 
 export const metadata: Metadata = {
   title: "Contact",

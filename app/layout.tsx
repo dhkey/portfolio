@@ -3,7 +3,8 @@ import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Terminal } from "@/components/Terminal";
-import { person, siteUrl } from "@/lib/content";
+import { person } from "@/content/person";
+import { siteUrl } from "@/content/site";
 import "@/styles/globals.css";
 
 const mono = JetBrains_Mono({

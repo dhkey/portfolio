@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Prompt } from "@/components/Prompt";
-import { person, routes, externals } from "@/lib/content";
+import { person } from "@/content/person";
+import { routes, externals } from "@/content/site";
 import { rise } from "@/lib/rise";
 
 export default function Home() {

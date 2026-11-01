@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { PageShell } from "./PageShell";
 import { ExternalLink } from "./ExternalLink";
-import { projects, projectTypes, type ProjectType } from "@/lib/content";
+import { projects, projectTypes, type ProjectType } from "@/content/projects";
 
 type Filter = ProjectType | "all";
 

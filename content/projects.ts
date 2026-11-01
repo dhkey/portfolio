@@ -1,26 +1,3 @@
-export const person = {
-  name: "denys yazan",
-  displayName: "Denys Yazan",
-  role: "software engineer · systems architect",
-  location: "Prague, Czech Republic",
-  host: "yazan",
-  user: "denys",
-  tagline:
-    "I design and ship full-stack products end to end - Next.js frontends, Python backends on Django and FastAPI, REST APIs and the infrastructure under them.",
-  status: "Software Engineer Intern at make.com · studying Software Engineering at CTU Prague.",
-  email: "denys-work@seznam.cz",
-  phone: "+420 722 133 964",
-  github: "https://github.com/dhkey",
-  githubHandle: "github.com/dhkey",
-  linkedin: "https://www.linkedin.com/in/denys-yazan",
-  linkedinHandle: "linkedin.com/in/denys-yazan",
-  avatar: "/denys.jpg",
-};
-
-/** Filterable buckets on /projects — the values behind `ls -l --type=…`. */
-export const projectTypes = ["web", "macos", "bot"] as const;
-export type ProjectType = (typeof projectTypes)[number];
-
 export type Project = {
   name: string;
   type: ProjectType;
@@ -29,6 +6,10 @@ export type Project = {
   href: string;
   linkLabel: string;
 };
+
+export type ProjectType = (typeof projectTypes)[number];
+
+export const projectTypes = ["web", "macos", "bot"] as const;
 
 export const projects: Project[] = [
   {
@@ -45,7 +26,7 @@ export const projects: Project[] = [
     type: "macos",
     summary:
       "Native macOS application launcher. Menu-bar SwiftUI/AppKit app with a global hotkey, diacritic-insensitive fuzzy search across installed apps, keyboard navigation and web-search fallback - shipped as universal DMG/PKG builds from a tagged GitHub Actions release pipeline.",
-    tags: ["swift", "swiftui", "macos", "desktop", "next.js", "react", "typescript", "static-site", ],
+    tags: ["swift", "swiftui", "macos", "desktop", "next.js", "react", "typescript", "static-site"],
     href: "https://beacon.denys-yazan.dev",
     linkLabel: "beacon.denys-yazan.dev",
   },
@@ -149,88 +130,3 @@ export const projects: Project[] = [
     linkLabel: "t.me/codes_verify_bot",
   },
 ];
-
-export const skillGroups: { label: string; items: string[] }[] = [
-  {
-    label: "languages",
-    items: [
-      "Python", "C++", "Java", "Swift", "PHP", "JavaScript",
-      "TypeScript", "Bash / Shell", "SQL", "HTML / CSS",
-    ],
-  },
-  {
-    label: "frameworks",
-    items: [
-      "Next.js", "React", "Django", "FastAPI", "Flask",
-      "Spring Boot", "Qt", "SwiftUI / UIKit", "Asyncio",
-      "Aiogram", "Jinja2",
-    ],
-  },
-  {
-    label: "infra",
-    items: [
-      "Docker & CI/CD", "Git & Linux", "Nginx", "PostgreSQL / MySQL",
-      "Redis", "REST / GraphQL", "Payment systems", "SQL / NoSQL",
-    ],
-  },
-  {
-    label: "practices",
-    items: [
-      "Clean architecture", "SOLID", "Design patterns", "System design",
-      "API design", "Agile / Scrum", "Code review", "Debugging & profiling",
-    ],
-  },
-];
-
-export const about = {
-  bio: [
-    "Software developer and systems architect with hands-on experience designing, building and shipping complex high-performance applications - independently, end to end.",
-    "I work across the stack - Next.js and TypeScript on the front, Python on Django and FastAPI behind it - with a strong emphasis on clean architecture, scalable systems and long-term reliability. Currently studying Software Engineering at CTU Prague while working as a Software Engineer Intern at make.com, growing inside a team environment.",
-  ],
-};
-
-export type TimelineEntry = { period: string; title: string; detail: string };
-
-export const experience: TimelineEntry[] = [
-  {
-    period: "may 2026 - now",
-    title: "make.com",
-    detail: "Software Engineer Intern",
-  },
-];
-
-export const education: TimelineEntry[] = [
-  {
-    period: "2025 - 2028",
-    title: "Czech Technical University in Prague",
-    detail: "Software Engineering",
-  },
-  {
-    period: "2024 - 2028",
-    title: "Central Ukrainian Technical University",
-    detail: "Cybersecurity",
-  },
-];
-
-export const languages: { name: string; level: string }[] = [
-  { name: "English", level: "B2" },
-  { name: "Czech", level: "B2" },
-  { name: "Ukrainian", level: "native" },
-  { name: "Russian", level: "native" },
-];
-
-export const routes: { path: string; label: string }[] = [
-  { path: "/projects", label: "what I have shipped" },
-  { path: "/blog", label: "notes and write-ups" },
-  { path: "/skills", label: "the toolkit" },
-  { path: "/about", label: "background" },
-  { path: "/contact", label: "how to reach me" },
-];
-
-export const externals: { path: string; href: string }[] = [
-  { path: "/github", href: person.github },
-  { path: "/linkedin", href: person.linkedin },
-  { path: "/email", href: `mailto:${person.email}` },
-];
-
-export const siteUrl = "https://denys-yazan.dev";

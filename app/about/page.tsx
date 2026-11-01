@@ -8,7 +8,7 @@ import {
   education,
   languages,
   type TimelineEntry,
-} from "@/lib/content";
+} from "@/content/person";
 
 export const metadata: Metadata = {
   title: "About",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Prompt } from "@/components/Prompt";
-import { routes } from "@/lib/content";
+import { routes } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "404 - no such file or directory",

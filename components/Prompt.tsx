@@ -1,4 +1,4 @@
-import { person } from "@/lib/content";
+import { person } from "@/content/person";
 
 export function Prompt({
   path = "~",

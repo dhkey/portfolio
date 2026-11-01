@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
-import { skillGroups } from "@/lib/content";
+import { skillGroups } from "@/content/skills";
 
 export const metadata: Metadata = {
   title: "Skills",

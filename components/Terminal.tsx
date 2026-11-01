@@ -2,7 +2,8 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { person, routes, externals } from "@/lib/content";
+import { person } from "@/content/person";
+import { routes, externals } from "@/content/site";
 
 /** A two-column row of the `help` / `ls` tables. */
 type Row = { key: string; desc: string; here?: boolean };
