@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Prompt } from "./Prompt";
-import { rise } from "@/lib/rise";
 
 export function PageShell({
   path,
@@ -17,17 +16,17 @@ export function PageShell({
 }>) {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise" style={rise(0)}>
+      <header className="stack-s rise">
         <Prompt path={path} cmd={cmd} />
         <h1 className="title">{title}</h1>
         {intro ? <p className="muted lede">{intro}</p> : null}
       </header>
 
-      <div className="rise" style={rise(1)}>
+      <div className="rise">
         {children}
       </div>
 
-      <footer className="stack-s rise" style={rise(2)}>
+      <footer className="stack-s rise">
         <hr className="rule" />
         <div className="chip-row">
           <Link className="chip" href="/">

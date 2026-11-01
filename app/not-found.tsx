@@ -19,24 +19,15 @@ export default function NotFound() {
       <section className="stack-s">
         <Prompt path="~" cmd="ls" />
         <ul className="chip-row">
-          {routes.map((r) => (
-            <li key={r.path}>
-              <Link className="chip" href={r.path}>
-                {r.path}
+          {[{ path: "/" }, ...routes].map((route) => (
+            <li key={route.path}>
+              <Link className="chip" href={route.path}>
+                {route.path}
               </Link>
             </li>
           ))}
         </ul>
       </section>
-
-      <footer className="stack-s">
-        <hr className="rule" />
-        <div className="chip-row">
-          <Link className="chip" href="/">
-            cd ~
-          </Link>
-        </div>
-      </footer>
     </main>
   );
 }

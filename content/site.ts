@@ -1,4 +1,4 @@
-import { person, experience, education } from "./person";
+import { person } from "./person";
 
 export const routes: { path: string; label: string }[] = [
   { path: "/projects", label: "what I have shipped" },
