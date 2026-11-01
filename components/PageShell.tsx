@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Prompt } from "./Prompt";
-import { rise } from "@/lib/rise";
 
 export function PageShell({
   path,
@@ -8,26 +7,26 @@ export function PageShell({
   title,
   intro,
   children,
-}: {
+}: Readonly<{
   path: string;
   cmd: React.ReactNode;
   title: string;
   intro?: string;
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <main className="page stack-l">
-      <header className="stack-s rise" style={rise(0)}>
+      <header className="rise">
         <Prompt path={path} cmd={cmd} />
-        <h1 className="title">{title}</h1>
+        <h1>{title}</h1>
         {intro ? <p className="muted lede">{intro}</p> : null}
       </header>
 
-      <div className="rise" style={rise(1)}>
+      <div className="rise">
         {children}
       </div>
 
-      <footer className="stack-s rise" style={rise(2)}>
+      <footer className="rise">
         <hr className="rule" />
         <div className="chip-row">
           <Link className="chip" href="/">

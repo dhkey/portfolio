@@ -15,3 +15,17 @@ export const externals: { path: string; href: string }[] = [
 ];
 
 export const siteUrl = "https://denys-yazan.dev";
+
+export const seo = {
+  title: `${person.displayName} - Software Engineer & Systems Architect`,
+  description:
+    "Denys Yazan - Software Engineer & Systems Architect in Prague. Full-stack engineer building frontend, connecting it with the backend, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
+  keywords: [
+    person.displayName,
+    "software engineer",
+    "Prague",
+    "full-stack",
+    "systems architect",
+    "engineering",
+  ],
+};

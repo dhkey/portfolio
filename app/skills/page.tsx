@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
 import { skillGroups } from "@/content/skills";
-
-export const metadata: Metadata = {
-  title: "Skills",
-  description:
-    "Languages, frameworks, infrastructure and engineering practices Denys Yazan works with - Next.js, React, TypeScript, Python, Django, FastAPI, Docker, PostgreSQL and more.",
-};
 
 export default function Skills() {
   return (

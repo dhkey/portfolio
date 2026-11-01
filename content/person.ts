@@ -1,8 +1,13 @@
+const city = "Prague";
+const country = "Czech Republic";
+
 export const person = {
   name: "denys yazan",
   displayName: "Denys Yazan",
   role: "software engineer · systems architect",
-  location: "Prague, Czech Republic",
+  city,
+  countryCode: "CZ",
+  location: `${city}, ${country}`,
   host: "yazan",
   user: "denys",
   tagline: "I design and ship full-stack products end to end - Next.js frontends, Python backends on Django and FastAPI, REST APIs and the infrastructure under them.",
@@ -15,6 +20,14 @@ export const person = {
   linkedinHandle: "linkedin.com/in/denys-yazan",
   avatar: "/denys.jpg",
 };
+
+export const contacts: { key: string; label: string; href?: string }[] = [
+  { key: "email", label: person.email, href: `mailto:${person.email}` },
+  { key: "phone", label: person.phone, href: `tel:${person.phone.replace(/\s/g, "")}` },
+  { key: "location", label: person.location },
+  { key: "linkedin", label: person.linkedinHandle, href: person.linkedin },
+  { key: "github", label: person.githubHandle, href: person.github },
+];
 
 export const about = {
   bio: [
