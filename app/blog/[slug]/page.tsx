@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Markdown from "react-markdown";
 import { PageShell } from "@/components/PageShell";
 import { getAllBlogs, getBlog } from "@/lib/blogs";
 
@@ -41,7 +42,9 @@ export default async function Blogblog({ params }: Readonly<{
       title={blog.title}
       intro={blog.date}
     >
-      <div className="prose" dangerouslySetInnerHTML={{ __html: blog.html }} />
+      <div className="prose">
+        <Markdown>{blog.content}</Markdown>
+      </div>
     </PageShell>
   );
 }
