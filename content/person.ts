@@ -21,6 +21,14 @@ export const person = {
   avatar: "/denys.jpg",
 };
 
+export const contacts: { key: string; label: string; href?: string }[] = [
+  { key: "email", label: person.email, href: `mailto:${person.email}` },
+  { key: "phone", label: person.phone, href: `tel:${person.phone.replace(/\s/g, "")}` },
+  { key: "location", label: person.location },
+  { key: "linkedin", label: person.linkedinHandle, href: person.linkedin },
+  { key: "github", label: person.githubHandle, href: person.github },
+];
+
 export const about = {
   bio: [
     "Software developer and systems architect with hands-on experience designing, building and shipping complex high-performance applications - independently, end to end.",

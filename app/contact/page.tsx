@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
 import { ExternalLink } from "@/components/ExternalLink";
-import { person } from "@/content/person";
+import { contacts, person } from "@/content/person";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -9,33 +9,11 @@ export const metadata: Metadata = {
     "Get in touch with Denys Yazan - email, phone, LinkedIn and GitHub. Based in Prague, open to new opportunities and collaboration.",
 };
 
-const rows: { key: string; value: React.ReactNode }[] = [
-  {
-    key: "email",
-    value: (
-      <a className="link" href={`mailto:${person.email}`}>
-        {person.email}
-      </a>
-    ),
-  },
-  {
-    key: "phone",
-    value: (
-      <a className="link" href={`tel:${person.phone.replace(/\s/g, "")}`}>
-        {person.phone}
-      </a>
-    ),
-  },
-  { key: "location", value: <span className="muted">{person.location}</span> },
-  {
-    key: "linkedin",
-    value: <ExternalLink href={person.linkedin}>{person.linkedinHandle}</ExternalLink>,
-  },
-  {
-    key: "github",
-    value: <ExternalLink href={person.github}>{person.githubHandle}</ExternalLink>,
-  },
-];
+function contactValue({ label, href }: (typeof contacts)[number]) {
+  if (!href) return <span className="muted">{label}</span>; // location row
+  if (href.startsWith("http")) return <ExternalLink href={href}>{label}</ExternalLink>; // external links like linkedin
+  return ( <a className="link" href={href}> {label} </a>); // email and phone
+}
 
 export default function Contact() {
   return (
@@ -47,10 +25,12 @@ export default function Contact() {
     >
       <div className="stack-m">
         <ul>
-          {rows.map((r) => (
-            <li key={r.key} className="kv">
-              <span className="kv-key">{r.key}</span>
-              <span className="kv-val">{r.value}</span>
+          {contacts.map((contact) => (
+            <li key={contact.key} className="kv">
+              <span className="kv-key">{contact.key}</span>
+              <span className="kv-val">
+                {contactValue(contact)}
+              </span>
             </li>
           ))}
         </ul>

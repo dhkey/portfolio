@@ -9,29 +9,28 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
-  const posts = getAllBlogs();
+  const blogs = getAllBlogs();
 
   return (
     <PageShell
-      path="~/blog"
-      cmd="ls -l"
-      title="blog"
-      intro={posts.length ? "Notes, write-ups and whatever else seemed worth putting into words." : undefined}
+      path="~/blog" cmd="ls -l"
+      title="blog" intro={"Notes, write-ups and whatever else seemed worth putting into words."}
     >
-      {posts.length === 0 ? (
+      
+      {blogs.length === 0 ? (
         <p className="muted">nothing here yet</p>
       ) : (
         <ol className="stack-s">
-          {posts.map((p) => (
-            <li key={p.slug}>
-              <Link href={`/blog/${p.slug}`} className="entry entry-link">
+          {blogs.map((blog) => (
+            <li key={blog.slug}>
+              <Link href={`/blog/${blog.slug}`} className="entry entry-link">
                 <div className="entry-head">
-                  <time className="entry-index" dateTime={p.date}>
-                    {p.date}
+                  <time className="entry-index" dateTime={blog.date}>
+                    {blog.date}
                   </time>
-                  <h2 className="entry-name">{p.title}</h2>
+                  <h2 className="entry-name">{blog.title}</h2>
                 </div>
-                {p.summary ? <p className="entry-summary">{p.summary}</p> : null}
+                {blog.summary}
               </Link>
             </li>
           ))}
