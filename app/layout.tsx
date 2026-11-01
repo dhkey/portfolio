@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Terminal } from "@/components/Terminal";
 import { person } from "@/content/person";
-import { siteUrl } from "@/content/site";
+import { seo, siteUrl } from "@/content/site";
 import "@/styles/globals.css";
 
 const mono = JetBrains_Mono({
@@ -15,70 +15,18 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: `${person.displayName} - Software Engineer & Systems Architect`,
-    template: `%s - ${person.displayName}`,
-  },
-  description:
-    "Denys Yazan - Software Engineer & Systems Architect in Prague. Full-stack engineer building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
+  title: { default: seo.title, template: `%s - ${person.displayName}`},
+  description: seo.description,
   authors: [{ name: person.displayName, url: siteUrl }],
   creator: person.displayName,
-  keywords: [
-    "Denys Yazan",
-    "software engineer",
-    "Prague",
-    "full-stack",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Python",
-    "Django",
-    "FastAPI",
-    "Telegram bots",
-    "systems architect",
-  ],
+  keywords: seo.keywords,
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    url: siteUrl,
-    siteName: person.displayName,
-    title: `${person.displayName} - Software Engineer & Systems Architect`,
-    description:
-      "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, Telegram bots and the infrastructure behind them. Software Engineer Intern at make.com.",
-  },
-  twitter: {
-    card: "summary",
-    title: `${person.displayName} - Software Engineer & Systems Architect`,
-    description:
-      "Full-stack engineer in Prague building Next.js frontends, Python APIs on Django and FastAPI, and Telegram bots.",
-  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#000000",
   colorScheme: "dark",
-};
-
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: person.displayName,
-  jobTitle: "Software Engineer",
-  email: `mailto:${person.email}`,
-  telephone: person.phone,
-  url: siteUrl,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Prague",
-    addressCountry: "CZ",
-  },
-  sameAs: [person.github, person.linkedin],
-  worksFor: { "@type": "Organization", name: "make.com" },
-  alumniOf: {
-    "@type": "CollegeOrUniversity",
-    name: "Czech Technical University in Prague",
-  },
 };
 
 export default function RootLayout({
@@ -91,10 +39,6 @@ export default function RootLayout({
           {children}
           <Terminal />
         </div>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
         <Analytics />
         <SpeedInsights />
       </body>

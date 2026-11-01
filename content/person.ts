@@ -1,8 +1,13 @@
+const city = "Prague";
+const country = "Czech Republic";
+
 export const person = {
   name: "denys yazan",
   displayName: "Denys Yazan",
   role: "software engineer · systems architect",
-  location: "Prague, Czech Republic",
+  city,
+  countryCode: "CZ",
+  location: `${city}, ${country}`,
   host: "yazan",
   user: "denys",
   tagline: "I design and ship full-stack products end to end - Next.js frontends, Python backends on Django and FastAPI, REST APIs and the infrastructure under them.",
