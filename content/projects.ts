@@ -13,15 +13,6 @@ export const projectTypes = ["web", "macos", "bot"] as const;
 
 export const projects: Project[] = [
   {
-    name: "smstogo.net",
-    type: "web",
-    summary:
-      "SMS verification platform built from zero - Next.js frontend, FastAPI backend on PostgreSQL, custom auth system, public API, payment gateway integration and CDN setup.",
-    tags: ["next.js", "fastapi", "postgresql", "payments"],
-    href: "https://smstogo.net",
-    linkLabel: "smstogo.net",
-  },
-  {
     name: "Beacon - Better MacOS's Spotlight.",
     type: "macos",
     summary:
@@ -67,24 +58,6 @@ export const projects: Project[] = [
     linkLabel: "github.com/dhkey/SideMouseButtons",
   },
   {
-    name: "sms-ready.com",
-    type: "web",
-    summary:
-      "SMS verification platform. Designed and built the complete product - design, frontend, backend, API provision, payment gateway and email system.",
-    tags: ["python", "django", "rest-api", "payments"],
-    href: "https://sms-ready.com",
-    linkLabel: "sms-ready.com",
-  },
-  {
-    name: "smscheck.net",
-    type: "web",
-    summary:
-      "SMS verification service sharing the sms-ready.com architecture. Full design, frontend, backend and integration stack built independently.",
-    tags: ["python", "django", "rest-api", "payments"],
-    href: "https://smscheck.net",
-    linkLabel: "smscheck.net",
-  },
-  {
     name: "@fabricscomuaBot",
     type: "bot",
     summary:
@@ -115,7 +88,7 @@ export const projects: Project[] = [
     name: "@sms_usa_bot",
     type: "bot",
     summary:
-      "Telegram bot backend for US SMS verification, wired into the same core API infrastructure as sms-ready.com.",
+      "Telegram bot backend for US SMS verification, wired into a shared core API infrastructure.",
     tags: ["python", "asyncio", "telegram-api"],
     href: "https://t.me/sms_usa_bot",
     linkLabel: "t.me/sms_usa_bot",
