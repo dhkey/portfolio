@@ -84,22 +84,4 @@ export const projects: Project[] = [
     href: "https://t.me/SonsOfWar_UA_bot",
     linkLabel: "t.me/SonsOfWar_UA_bot",
   },
-  {
-    name: "@sms_usa_bot",
-    type: "bot",
-    summary:
-      "Telegram bot backend for US SMS verification, wired into a shared core API infrastructure.",
-    tags: ["python", "asyncio", "telegram-api"],
-    href: "https://t.me/sms_usa_bot",
-    linkLabel: "t.me/sms_usa_bot",
-  },
-  {
-    name: "@codes_verify_bot",
-    type: "bot",
-    summary:
-      "Telegram bot for code verification. Backend built on shared API infrastructure for real-time code delivery.",
-    tags: ["python", "asyncio", "telegram-api"],
-    href: "https://t.me/codes_verify_bot",
-    linkLabel: "t.me/codes_verify_bot",
-  },
 ];
